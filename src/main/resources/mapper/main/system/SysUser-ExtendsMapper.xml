@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="cn.smarthse.business.dao.system.SysUserMapper">
+	<!-- 拓展的SQL查询 -->
+	
+	<!-- 查询用户列表 -->
+	<select id="queryBySearchModel" parameterType="map" resultMap="BaseResultMap">
+		SELECT DISTINCT a.* FROM `sys_user` a
+		LEFT JOIN `sys_user_role` t ON t.`uid`=a.`ID` and t.is_valid = 1
+		WHERE a.is_valid = 1 AND a.cid=#{cid}
+		
+		<if test=" keyword != null and keyword!='' ">
+		<![CDATA[
+            AND CONCAT(IFNULL(a.`real_name`, ''), ','
+            ,  IFNULL(a.`staff_no`, '')) like CONCAT(CONCAT('%',#{keyword},'%') )
+        ]]>
+		</if>
+		
+		<if test=" dutyState != null and dutyState >0 ">
+		  <![CDATA[
+		  	AND a.`duty_state` = #{dutyState}
+		  ]]>
+		</if>
+		
+		<if test=" roleId != null and roleId !=''">
+		  <![CDATA[
+		  	 AND t.`role_id` = #{roleId }
+		  ]]>
+		</if>
+		
+		<if test=" roleIds != null and roleIds!='' ">
+		  <![CDATA[
+		  	 AND t.`role_id` in ('${roleIds }')
+		  ]]>
+		</if>
+		
+		<if test=" deptId != null and deptId!='' ">
+		  <![CDATA[
+		  	 AND a.`dept_id` = ${deptId}
+		  ]]>
+		</if>
+		
+		ORDER BY a.staff_no+0 ASC,MID(a.staff_no,1,10) ASC
+	
+	</select>
+	
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="cn.smarthse.business.dao.system.SysLogMapper">
+
+	<resultMap id="BaseResultMap" type="cn.smarthse.business.entity.system.SysLog">
+        <result property="id" column="ID"/>
+        <result property="cid" column="cid"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="isValid" column="is_valid"/>
+        <result property="userId" column="user_id"/>
+        <result property="description" column="description"/>
+        <result property="userName" column="user_name"/>
+        <result property="userFullname" column="user_fullname"/>
+        <result property="userAgent" column="user_agent"/>
+        <result property="requestUri" column="request_uri"/>
+        <result property="requestMethod" column="request_method"/>
+        <result property="moduleName" column="module_name"/>
+        <result property="logType" column="log_type"/>
+        <result property="logParams" column="log_params"/>
+        <result property="requestIp" column="request_ip"/>
+	</resultMap>
+	
+</mapper>
+

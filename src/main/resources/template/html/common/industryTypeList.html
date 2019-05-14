@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>行业分类</title>
+<#include "/html/include/header.html">
+<link rel="stylesheet" href="/static/assets/css/style_dev.css" />
+</head>
+
+<body>
+	<#include "/html/include/navbar.html">
+	<div class="main-container" id="main-container">
+		<div class="main-container-inner">
+			<#include "/html/include/sidebar.html">
+			<div class="main-content">
+				<!-- 位置 S -->
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li>
+							<a href="/">首页</a>
+						</li>
+						<li><a href="/system/param">系统参数</a></li>
+						<li class="active">行业分类</li>
+					</ul>
+				</div>
+				<!-- 位置 E -->
+
+				<!-- 内容区 S -->
+				<div class="dose-content">
+					<!-- 页面标题 S -->
+					<div class="page-header">
+						<h1>行业分类列表</h1>
+					</div>
+					<!-- 页面标题 E -->
+					<div class=" searchBox">
+						<form id="searchForm">
+							<div class="input-group group-list fl">
+								<div class="groupTit fl">分类等级：</div>
+								<div class="width-auto fl momoDate width260">
+									<select name="level" class="width260">
+									<option value="">全部</option>
+									<option value="1">一级</option>
+									<option value="2">二级</option>
+									<option value="3">三级</option>
+									</select>
+								</div>
+								<div class="groupTit fl">分类名称：</div>
+								<div class="width-auto fl momoDate width260">
+									<input name="name" class="width260" type="text" />
+								</div>
+							</div>
+						</form>
+						<div class='fl '>
+							<a class="btn btn-sm btn-cyan  sousRefer" onclick="searchForm();">搜 索</a>
+						</div>
+						<div class='clear'></div>
+					</div>
+					<!-- 内容 S -->
+					<div class="Bus-neir ">
+						<table id="jqGrid"></table>
+						<div id="jqGridPager"></div>
+					</div>
+					<!-- 内容 E -->
+				</div>
+			</div>
+			<!-- 内容区 E -->
+		</div>
+	</div>
+	
+	
+
+	<#include "/html/include/footer.html"> 
+	<script type="text/javascript" src="/static/page/system/param/industryList.js"></script>
+</body>
+
+</html>

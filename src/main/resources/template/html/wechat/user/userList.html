@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<#include "/html/include/meta.html">
+<link rel="stylesheet" href="/static/assets/css/zTreeStyle/zTreeStyle.css" />
+<title>微信用户管理</title>
+</head>
+
+<body class="sticky-header">
+
+	<#include "/html/include/menu.html">
+	
+	<div class="main-content">
+
+		<#include "/html/include/header.html"> 
+
+		<div class="wrapper">
+
+			<!--Start Page Title-->
+			<div class="page-title-box">
+				<h4 class="page-title">华东制药微信用户管理</h4>
+				<ol class="breadcrumb">
+					<li>
+						<a href="#">系统管理</a>
+					</li>
+
+					<li class="active">微信用户管理</li>
+				</ol>
+				<div class="clearfix"></div>
+			</div>
+			<!--End Page Title-->
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="white-box">
+
+						<form id="searchForm" class="form-horizontal">
+							<input name="department" type="hidden" id="deptId">
+							<div class="form-group">
+								<label class="col-md-1 control-label">姓名</label>
+								<div class="col-md-2">
+									<input class="form-control" name="name" type="text">
+								</div>
+								
+								<label class="col-md-1 control-label">手机</label>
+								<div class="col-md-2">
+									<input class="form-control" name="mobile" type="text">
+								</div>
+								
+								<label class="col-md-1 control-label">岗位</label>
+								<div class="col-md-2">
+									<input class="form-control" name=position type="text">
+								</div>
+								
+								<div class="col-md-2">
+								</div>
+																								
+								<div class="col-md-1">
+									<button type="button" onclick="searchForm();" class="btn btn-primary">搜索</button>
+								</div>
+
+							</div>													
+						</form>						
+					</div>					
+				</div>
+			</div>
+
+
+			<!-- 内容 S -->
+			<div class="row">
+				<div class="col-md-3">
+					
+						<ul id="treeDemo" class="ztree" style="height:auto;"></ul>
+					
+				</div>
+				<div class="col-md-9">
+					<div class="white-box">
+						<table id="jqGrid"></table>
+						<div id="jqGridPager"></div>
+					</div>
+				</div>
+			</div>
+			<!-- 内容 E -->
+
+		</div>
+		<!-- End Wrapper--> 
+		
+		<#include "/html/include/footer.html"> 
+		<script type="text/javascript" src="/static/assets/js/ztree/jquery.ztree.core.js"></script><!-- 树图 --> 
+		<script type="text/javascript" src="/static/page/wechat/userList.js"></script>
+		
+	</div>
+	<!--End main content -->		
+</body>
+
+</html>

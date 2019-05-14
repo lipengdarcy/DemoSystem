@@ -1,0 +1,88 @@
+#开发环境配置：dev
+spring.profiles.active: dev
+
+#正式环境配置：product
+#spring.profiles.active: product
+  
+#tomcat/undertow配置
+server:
+  port: 9000
+  contextPath: /
+  undertow: 
+    accesslog: 
+      enabled: true  # 是否开启服务器的访问日志
+      dir: log  # 服务器的访问日志所在目录
+      #pattern: common # 缺省的日志格式
+      #自定义日志格式
+      pattern: '%{time,yyyy-MM-dd HH:mm:ss} %m %U %s %{i,Referer}'
+      prefix: access_log. # 访问日志的前缀
+      rotate: true # Enable access log rotation.
+      suffix: log # 访问日志的后缀
+    #buffer-size:  # Size of each buffer in bytes.
+    #buffers-per-region:  # Number of buffer per region.
+    #direct-buffers:  # Allocate buffers outside the Java heap.
+    #io-threads:  # Number of I/O threads to create for the worker.
+    #max-http-post-size:  # Maximum size in bytes of the HTTP post content.
+    #worker-threads:  # Number of worker threads.
+
+#日志配置
+logging:
+  level: 
+    root: info
+    cn.smarthse.business.controller: debug
+    cn.smarthse.business.service: debug
+    cn.smarthse.business.dao: debug
+  file: log/SpringBoot.log
+
+
+spring:
+
+  #事务配置
+  transaction: 
+    rollback-on-commit-failure: true
+
+  #文件上传配置
+  http:
+    multipart: 
+      enabled: true  #默认支持文件上传 
+      file-size-threshold: 0  #支持文件写入磁盘
+      location: upload  # 上传文件的临时目录  
+      max-file-size: 40Mb  # 最大支持文件大小  
+      max-request-size: 100Mb  # 最大支持请求大小  
+    
+  #模板引擎
+  freemarker:
+    cache: false
+    request-context-attribute: request
+    template-loader-path: classpath:/template
+    suffix: .html
+    prefix: /html/   
+ 
+#mybatis配置：dao层接口路径+sql文件mapper
+mybatis: 
+  type-aliases-package: cn.smarthse.business.model
+  mapper-locations: classpath*:mapper/business/**/*Mapper.xml
+
+    
+#===============================#
+#===== Task线程          settings =====#
+#===============================#
+taskexecutor:
+    core_pool_size: 10
+    max_pool_size: 30
+    queue_capacity: 1000
+    keep_alive_seconds: 0
+
+#===============================#
+#===== email  settings     =====#
+#===============================#
+email:
+    host: hwhzsmtp.qiye.163.com
+    port: 994
+    username: zyj@smarthse.cn
+    password: tR8hkLwsgkAbUZAh
+    smtp_auth: true
+    defaultEncoding: utf-8
+    customer: zuoyj@smarthse.cn    #客户通知邮箱
+
+    

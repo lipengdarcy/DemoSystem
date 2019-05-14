@@ -1,0 +1,153 @@
+
+<form id="editForm" role="form">
+	<table class="table table-bordered mb10 center">
+		<tbody>
+			<tr>
+				<td width="120" class="active center">用户名</td>
+				<td>
+					<div class="input-group">${editUser.userName!""}</div>
+				</td>
+				<input type="hidden" name="userName" value="${editUser.userName!''}" />
+				<input type="hidden" name="id" value="${editUser.id!''}" />
+			</tr>
+			<tr>
+				<td width="120" class="active center">
+					<b class="red">*</b>
+					姓名
+				</td>
+				<td>
+					<div class="input-group">
+						<input type="text" name="realName" placeholder="请输入姓名" value="${editUser.realName!''}" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td width="120" class="active center">
+					<b class="red">*</b>
+					工号
+				</td>
+				<td>
+					<div class="input-group">
+						<input name="staffNo" type="text" placeholder="请输入工号" value="${editUser.staffNo!''}" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td width="120" class="active center">身份证号</td>
+				<td>
+					<div class="input-group">
+						<input type="text" name="idCard" placeholder="请输入身份证号" value="${editUser.idCard!''}" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td width="120" class="active center">
+					<b class="red">*</b>
+					手机号
+				</td>
+				<td>
+					<div class="input-group">
+						<input type="text" name="tel" placeholder="请输入手机号" value="${editUser.tel!''}" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td width="120" class="active center">
+					<b class="red">*</b>
+					部门
+				</td>
+				<td>
+					<div class="input-group align-left z9999">
+						<select id="deptId" name="deptId" class="chosen-select" id="cse" tabindex="1" onchange="">
+							<#list deptList as dept>
+							<option value="${dept.id}"<#if dept.id == editUser.dept.id> checked</#if>>
+										${dept.deptName}
+									</option>
+								</#list>
+							</select>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center"><b class="red">*</b> 岗位状态</td>
+					<td>
+						<div class="input-group">
+							<select name="dutyState" id="">
+								<option value="1" <#if dutyState == 1> checked</#if>>在岗</option>
+								<option value="2">离岗</option>
+								
+							</select>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center">进入部门时间</td>
+					<td>
+						<div class=" fl momoDate width260 " style="line-height: 34px;">
+							<input id="deptJoinDateString" class="datepicker width260 h34" type="text"  placeholder="请选择进入部门时间" value="${(editUser.deptJoinDate?string('yyyy-MM-dd'))!}"/>
+							
+							<span class="input-group-icon">
+								<i class="icondose dos-datatime"></i>
+							</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center"><b class="red">*</b> 角色</td>
+					<td>
+						<div class="input-group">
+							<select id="roleIds" name="roleIds"class="chosen-select"  data-placeholder="请选择角色" tabindex="1" onchange="" multiple="">
+								<#list roleList as role>
+									<option value="${role.id}" 
+										<#list editUser.userRoleList as userRole>
+											<#if userRole.roleId == role.id>selected</#if>
+										</#list>
+									>
+										${role.roleName}
+									</option>
+								</#list>
+							</select>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+</form>
+	
+
+<script type="text/javascript" src="/static/assets/js/moment.js"></script><!-- 日期插件 -->
+<script type="text/javascript" src="/static/assets/js/daterangepicker.js"></script><!-- 日期插件 -->
+<!-- 添加界面统一js区域 -->
+<script type="text/javascript" src="/static/assets/js/ace-patch.js"></script>
+<script>
+	//表单验证
+	function validateForm1() {
+		return $("#editForm").validate({
+			rules : {
+				name : {
+					required : true
+				},
+				tel : {
+					required : true
+				}
+			}
+		}).form();
+
+	};
+	setTimeout(function() {
+		//部门
+		var name = "${editUser.dept.deptName}";
+		if (name == "") {
+			$("#deptId_chosen a.chosen-single").children("span").text("请选择");
+			$("#deptId").val(0);
+		} else {
+			$("#deptId_chosen a.chosen-single").children("span").text(name);
+		}
+
+	}, 50)
+</script>
+
+
+
+
+

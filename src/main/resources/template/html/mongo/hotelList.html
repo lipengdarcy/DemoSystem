@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<#include "/html/include/meta.html">
+<title>2000W</title>
+</head>
+
+<body class="sticky-header">
+
+	<#include "/html/include/menu.html"> 
+	
+	<div class="main-content">
+
+		<#include "/html/include/header.html"> 
+
+		<div class="wrapper">
+
+			<!--Start Page Title-->
+			<div class="page-title-box">
+				<h4 class="page-title">如家入住记录</h4>
+				<ol class="breadcrumb">
+					<li>
+						<a href="#">我的工作</a>
+					</li>
+
+					<li class="active">如家入住记录</li>
+				</ol>
+				<div class="clearfix"></div>
+			</div>
+			<!--End Page Title-->
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="white-box">
+
+							<form class="form-inline">
+								<div class="row">
+									<div class="col-xs-4">
+										<div class="input-group">
+											<span class="input-group-addon">入住时间</span> <input
+												class="form-control" type="text" name="date-range-picker"
+												id="id-date-range-picker-1"><span
+												class="input-group-addon"> <i
+												class="icon-calendar bigger-110"></i>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-4">
+										<div class="input-group">
+											<span class="input-group-addon">姓名</span> <input type="text"
+												name="name" class="form-control" placeholder="账号或者姓名">
+										</div>
+									</div>
+									<div class="col-xs-4">
+										<div class="input-group">
+											<span class="input-group-addon">生日</span> <input type="text"
+												name="birthday" class="form-control"><span
+												class="input-group-addon"> <i
+												class="icon-calendar bigger-110"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="space-4"></div>
+
+								<div class="row">
+									<div class="col-xs-4">
+										<div class="input-group">
+											<span class="input-group-addon">手机</span> <input type="text"
+												name="mobile" class="form-control">
+										</div>
+									</div>
+									<div class="col-xs-4">
+										<div class="input-group">
+											<span class="input-group-addon">邮箱</span> <input type="text"
+												name="email" class="form-control">
+										</div>
+									</div>
+									<div class="col-xs-4">
+										<div class="input-group">
+											<span class="input-group-addon">住址</span> <input type="text"
+												name="address" class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="space-4"></div>
+
+								<div class="row">
+									<div class="col-xs-11"></div>
+									<div class="col-xs-1">
+										<div class="input-group">
+											<span class="input-group-btn">
+												<button type="button" onclick="query();"
+													class="btn btn-purple btn-sm">
+													搜索 <i class="icon-search icon-on-right bigger-110"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="space-4"></div>
+
+							</form>
+					</div>					
+				</div>
+			</div>
+
+			<!--Start row-->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="white-box">
+					<table id="jqGrid" rel="jqgridForm"></table>
+					<div id="jqGridPager"></div>	
+					</div>	
+				</div>
+			</div>
+			<!--End row-->
+
+		</div>
+		<!-- End Wrapper--> 
+		
+		<#include "/html/include/footer.html"> 
+		<script type="text/javascript" src="/static/page/mongo/hotelList.js"></script>
+		
+	</div>
+	<!--End main content -->		
+</body>
+
+</html>

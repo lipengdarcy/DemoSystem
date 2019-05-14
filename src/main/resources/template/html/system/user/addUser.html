@@ -1,0 +1,131 @@
+<div class="pop-choice-box">
+	<form id="addForm" role="form">
+		<table class="table table-bordered mb10">
+			<tbody>
+				
+				<tr>
+					<td width="120" class="active center"><b class="red">*</b> 姓名</td>
+					<td>
+						<div class="input-group">
+							<input id="realName" type="text" name="realName" placeholder="请输入姓名" onchange=""/>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center"><b class="red">*</b>工号</td>
+					<td>
+						<div class="input-group">
+							<input name="staffNo" type="text" placeholder="请输入工号" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center">身份证号</td>
+					<td>
+						<div class="input-group">
+							<input type="text" name="idCard" placeholder="请输入身份证号" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center"><b class="red">*</b> 手机号</td>
+					<td>
+						<div class="input-group">
+							<input type="text" name="tel" placeholder="请输入手机号" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center"><b class="red">*</b> 部门</td>
+					<td>
+						<div class="input-group align-left z9999">
+							<select name="deptId" class="chosen-select"  data-placeholder="请选择所在部门" tabindex="1" onchange="">
+								<#list deptList as dept>
+									<option value="${dept.id}">
+										${dept.deptName}
+									</option>
+								</#list>
+							</select>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center"><b class="red">*</b> 岗位状态</td>
+					<td>
+						<div class="input-group">
+							<select name="dutyState" id="">
+								<option value="1">在岗</option>
+								<option value="2">离岗</option>
+								
+							</select>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center">进入部门时间</td>
+					<td>
+						<div class=" fl momoDate width260 " style="line-height: 34px;">
+							<input class="datepicker width260 h34" name="deptJoinDateString" type="text"  />
+							<span class="input-group-icon">
+								<i class="icondose dos-datatime"></i>
+							</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center"><b class="red">*</b> 角色</td>
+					<td>
+						<div class="input-group">
+							<select name="roleIds"class="chosen-select"  data-placeholder="请选择角色" tabindex="1" onchange="" multiple="">
+								<#list roleList as role>
+									<option value="${role.id}">
+										${role.roleName}
+									</option>
+								</#list>
+							</select>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center"><b class="red">*</b>用户名</td>
+					<td>
+						<div class="input-group">
+							<input id="userName" type="text" name="userName" placeholder="请输入用户名"/>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	<div>注：默认密码为giian123456</div>
+</div>
+<script type="text/javascript" src="/static/assets/js/moment.js"></script><!-- 日期插件 -->
+<script type="text/javascript" src="/static/assets/js/daterangepicker.js"></script><!-- 日期插件 -->
+<!-- 添加界面统一js区域 -->
+<script type="text/javascript" src="/static/assets/js/ace-patch.js"></script>
+
+
+<script>
+	//表单验证
+	function validateForm1(){
+		return $("#addForm").validate({
+			rules:{
+				name:{
+					required:true
+				},
+				tel:{
+					required:true
+				}
+			}
+		}).form();
+
+	};
+	
+	listen("#realName","#userName");
+	
+</script>
+
+
+
+
+

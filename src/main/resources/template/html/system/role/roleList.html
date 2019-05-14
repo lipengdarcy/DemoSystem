@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<#include "/html/include/meta.html">
+<title>角色管理</title>
+</head>
+
+<body class="sticky-header">
+	<#include "/html/include/menu.html"> 	
+	<div class="main-content">
+		<#include "/html/include/header.html"> 
+		<div class="wrapper">
+			<!--Start Page Title-->
+			<div class="page-title-box">
+				<h4 class="page-title">用户管理</h4>
+				<ol class="breadcrumb">
+					<li>
+						<a href="#">系统管理</a>
+					</li>
+					<li class="active">角色管理</li>
+				</ol>
+				<div class="clearfix"></div>
+			</div>
+			<!--End Page Title-->
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="white-box">
+
+						<form id="searchForm" class="form-horizontal">
+							<div class="form-group">
+								<label class="col-md-2 control-label">姓名/用户名</label>
+								<div class="col-md-2">
+									<input class="form-control" placeholder="请输入名称" type="text" name="roleName">
+								</div>
+				
+								<div class="col-md-2">
+									<button type="button" onclick="searchForm();" class="btn btn-primary">搜索</button>
+								</div>
+							</div>													
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!--Start row-->
+			<div class="row">
+				<div class="col-md-12">
+					<table id="jqGrid" rel="jqgridForm"></table>
+					<div id="jqGridPager"></div>		
+				</div>
+			</div>
+			<!--End row-->
+
+
+		</div>
+		<!-- End Wrapper--> 
+		
+		<#include "/html/include/footer.html"> 
+		<script type="text/javascript" src="/static/page/system/role/roleList.js"></script>
+		
+	</div>
+	<!--End main content -->		
+</body>
+
+</html>

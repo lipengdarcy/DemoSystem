@@ -1,0 +1,84 @@
+<div class="pop-choice-box">
+	<form id="yanzpail1" role="form">
+		<table class="table table-bordered mb10 center">
+			<tbody>
+
+				<tr>
+					<td width="120" class="active center">用户名</td>
+					<td>
+						<div class="input-group">${viewUser.userName!""}</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center">姓名</td>
+					<td>
+						<div class="input-group">${viewUser.realName!""}</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center">工号</td>
+					<td>
+						<div class="input-group">${viewUser.staffNo!""}</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center">身份证号</td>
+					<td>
+						<div class="input-group">${viewUser.idCard!""}</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center">手机号</td>
+					<td>
+						<div class="input-group">${viewUser.tel!""}</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center">部门</td>
+					<td>
+						<div class="input-group">${viewUser.deptName!""}</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center">岗位状态</td>
+					<td>
+						<div class="input-group">${viewUser.dutyState!""}</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center">进入部门时间</td>
+					<td>
+						<div class="input-group">${(viewUser.deptJoinDate?string("yyyy-MM-dd"))!""}</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center">角色</td>
+					<td>
+						<div class="input-group">${viewUser.roleNames!""}</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" class="active center">负责区域</td>
+					<td>
+						<div class="input-group">放射: <@_area.names viewUser.salesAreaIds/></div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+</div>
+
+<script>
+	
+
+</script>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+﻿<#include "/html/include/header.html">
+
+<style>
+	/* 地区选择联动样式S */
+	.ft16{font-size:16px;}
+	.ft18{font-size:18px;}
+	.ft20{font-size: 20px;}
+	.dan_grey{color:#d5d5d5;}
+
+	.ml5{margin-left: 5px!important;}
+	.mg0{margin:0px!important;}
+	.lh30{line-height: 30px;}
+	.lh36{line-height: 36px!important;}
+	.w-auto{width:auto!important;}
+
+	.address-group{width:100% !important;height:30px;line-height:30px;width: auto;position: relative;display: block; background: #fff;}
+
+	.addressSum:hover{border-bottom: 0!important;}
+	.address-box{position: absolute;top:29px;background: white;height: auto;min-width: 600px;width:auto;z-index: 79;border: 1px solid #d5d5d5;padding-left: 10px;padding-bottom: 30px;}
+	.addressTab{margin-top:20px;border:0!important;}
+	.addressTab li{ margin-top: 0;}
+	.addressTabContent{border:0!important;}
+	ul.areaList li a{display:block;min-width:80px;float: left;margin-right:10px;}
+	.addressSum{width:100% !important;height:30px;line-height:30px;display: inline-block;z-index: 80;padding: 0px 20px 0px 10px;border: 1px solid #d5d5d5;position: absolute;white-space:nowrap;background: white;}
+	.addressSum-i{position: absolute;right: 5px;height: 100%;display: inline-block;line-height: 30px;z-index: 101;}
+	.addressSum_val{position: absolute;left: 0px;z-index:79;}
+	.address-group .input-control.error{position: absolute!important;top:0;border-color: #f59942;z-index: 99;}
+	/* 地区选择联动样式E */
+</style>
+<div class="width-100">
+	<!-- <div class="link">
+		<div>
+			<select class="width30 fl" id="s_province" name="s_province"></select>  
+			<select class="width30 fl" id="s_city" name="s_city" ></select>  
+			<select class="width30 fl" id="s_county" name="s_county"></select>
+		</div>
+		<div id="show"></div>
+	</div> -->
+
+	<div class="address-group input-group fl " id="city-picker-V2"></div>
+	
+</div>
+<!-- <script type="text/javascript">_init_area();</script>	 -->
+<script type="text/javascript" src="/static/js/store/store.legacy.min.js" ></script>
+<script type="text/javascript" src="/static/js/smarthse.cityPicker2.js"></script>
+<script>
+	$('#city-picker-V2').smarthse_CityPickerV2({
+        remoteUrl:'${ctx}/checkManager/district/',
+		level: 3,
+		storage: false,
+		selectpattern: [{
+			field: 'userProvinceId',
+			placeholder: '请选择省份',
+			value : '330000000000'
+		},
+			{
+				field: 'userCityId',
+				placeholder: '请选择城市',
+				value : '330100000000'
+			},
+			{
+				field: 'userDistrictId',
+				placeholder: '请选择区县',
+				value : '330102000000'
+			},
+		],
+		onInitialized : function(){
+			//console.log("初始化完成");
+		},
+		onSelected : function(data){
+			//console.info(data);
+		},
+
+	});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1 @@
+start "DemoSystem"  java -Dfile.encoding=UTF-8 -jar DemoSystem-1.0.jar

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smarthse.business.dao.WxUserMapper">
+
+	<resultMap id="BaseResultMap" type="cn.smarthse.business.entity.WxUser">
+		<result property="id" column="id" />
+		<result property="cid" column="cid" />
+		<result property="userid" column="userid" />
+		<result property="name" column="name" />
+		<result property="department" column="department" />
+		<result property="position" column="position" />
+		<result property="mobile" column="mobile" />
+		<result property="gender" column="gender" />
+		<result property="email" column="email" />
+		<result property="avatar" column="avatar" />
+		<result property="status" column="status" />
+		<result property="enable" column="enable" />
+		<result property="isleader" column="isleader" />
+		<result property="extattr" column="extattr" />
+		<result property="hideMobile" column="hide_mobile" />
+		<result property="englishName" column="english_name" />
+		<result property="telephone" column="telephone" />
+		<result property="order_by" column="order_by" />
+		<result property="qrCode" column="qr_code" />
+		<result property="alias" column="alias" />
+		<result property="isLeaderInDept" column="is_leader_in_dept" />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+
+	<resultMap id="userDetail" type="cn.smarthse.business.entity.WxUser">
+		<result property="deptName" column="deptName" />
+	</resultMap>
+
+	<!-- 查询用户列表 -->
+	<select id="query" parameterType="map"
+		resultType="cn.smarthse.business.model.wechat.WxUserModel">
+		SELECT a.*, (select group_concat(name) from wx_department where
+		FIND_IN_SET(id, a.department)) deptName
+		FROM wx_user a
+		where 1=1
+		<if test=" name != null and name !='' ">
+			and a.name like CONCAT('%',#{name},'%')
+		</if>
+		<if test=" mobile != null and mobile !='' ">
+			and a.mobile like CONCAT('%',#{mobile},'%')
+		</if>
+		<if test=" position != null and position !='' ">
+			and a.position like CONCAT('%',#{position},'%')
+		</if>
+		<if test=" department != null and department !='' ">
+			and exists(SELECT * FROM wx_department b where
+			FIND_IN_SET(b.id, a.department) and b.path like
+			CONCAT('%',#{department},'%'))
+		</if>
+
+	</select>
+
+</mapper>
+

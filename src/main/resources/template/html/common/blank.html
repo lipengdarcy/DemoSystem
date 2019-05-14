@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>空白页</title>
+<#include "/html/include/header.html">
+<link rel="stylesheet" href="/static/assets/css/style_dev.css" />
+</head>
+
+<body>
+	<#include "/html/include/navbar.html">
+
+	<div class="main-container" id="main-container">
+		<div class="main-container-inner">
+			
+			<#include "/html/include/sidebar.html">
+
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"></i> <a href="#">Home</a>
+						</li>
+
+						<li><a href="#">Other Pages</a></li>
+						<li class="active">Blank Page</li>
+					</ul>
+					<!-- .breadcrumb -->
+
+					<div class="nav-search" id="nav-search">
+						<form class="form-search">
+							<span class="input-icon"> <input type="text"
+								placeholder="Search ..." class="nav-search-input"
+								id="nav-search-input" autocomplete="off" /> <i
+								class="icon-search nav-search-icon"></i>
+							</span>
+						</form>
+					</div>
+					<!-- #nav-search -->
+				</div>
+
+				<div class="page-content">
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- PAGE CONTENT BEGINS -->
+							UserTag Example ===========================================================
+							<ul>
+								<li>#userTag realName id》 <@_user.realName "1" /></li>
+								<li>#userTag realName id》 <@_user.realName "56" /></li>
+								<li>#userTag realNames ids》 <@_user.realNames "1,56" /></li>
+							</ul>
+							<!-- PAGE CONTENT ENDS -->
+							
+							<!-- PAGE CONTENT BEGINS -->
+							FileTag Example ===========================================================
+							<ul>
+								<li>#fileTag a_fileName id》 <@_file.a_fileName "2" /></li>
+								<li>#fileTag a_fileNames ids》 <@_file.a_fileNames "3,4" /></li>
+							</ul>
+							<!-- PAGE CONTENT ENDS -->
+							
+							<!-- PAGE CONTENT BEGINS -->
+							AreaTag Example ===========================================================
+							<ul>
+								<li>#areaTag name id》 <@_area.name "330000000001" /></li>
+								<li>#areaTag names ids》 <@_area.names "330100000000,330300000000,110105000000" /></li>
+							</ul>
+							<!-- PAGE CONTENT ENDS -->
+							
+							
+							<!-- PAGE CONTENT BEGINS -->
+							MultipleInput Example ===========================================================
+							<table class="table table-bordered edit mb10">
+								<tbody>
+									<tr>
+										<td class="active center" width="180"><b class="red">*</b>多个文本框输入</td>
+										<td>
+											<@_multipleInput.ul_input "","xxxfield" />
+										</td>
+										<td class="active center" width="180">行政区域：市级（单/多选）</td>
+										<td>
+											<div class="input-group">
+												<select multiple=""  class=" chosen-city-select" data-placeholder="请选择" selectedIds="110100000000" disabledIds="110100000000">
+												</select>
+											</div>
+										</td>
+									</tr>
+									
+									<tr>
+										<td class="active center" width="180"><b class="red">*</b>人员单/多选（multiple）</td>
+										<td>
+											<div class="input-group">
+												<select  multiple="" name="lingqu" selectedIds="30,38" disabledIds="30" class="chosen-user-select" data-placeholder="请选择">		
+												</select>
+											</div>
+										</td>
+										<td class="active center" width="180">人员单/多选multiple+(带角色 roleIds)</td>
+										<td>
+											<div class="input-group">
+												<select  multiple="" name="lingqu" roleIds="1,2"  class="chosen-user-select" data-placeholder="请选择">		
+												</select>
+											</div>
+										</td>
+									</tr>
+									
+									<tr>
+										<td class="active center" width="180"><b class="red">*</b>部门多选multiple</td>
+										<td>
+											<div class="input-group">
+												<select  multiple=""  class="chosen-dept-select" data-placeholder="请选择">		
+												</select>
+											</div>
+										</td>
+										<td class="active center" width="180">部门单选</td>
+										<td>
+											<div class="input-group">
+												<select   class="chosen-dept-select" data-placeholder="请选择">		
+												</select>
+											</div>
+										</td>
+									</tr>
+									
+									<tr>
+										<td class="active center" width="180"><b class="red">*</b>行政区域单选</td>
+										<td>
+											<div class="input-group">
+												<div id="chooseArea"></div>
+											</div>
+										</td>
+										<td class="active center" width="180"><b class="red">*</b>行业单选</td>
+										<td>
+											<div class="input-group">
+												<div id="chooseIndustry"></div>
+											</div>
+										</td>
+									</tr>
+									
+									<tr>
+										<td class="active center" width="180"><b class="red">*</b>生成年度报告</td>
+										<td colspan="3">
+											<div class="input-group">
+												<input type="button" value="生成年度报告" onclick="yearReport();">
+												<input type="button" value="生成原始记录" onclick="rawData();">
+												<input type="button" value="生成检测报告" onclick="projectReport();">
+											</div>
+										</td>
+										
+									</tr>
+									
+									
+								</tbody>
+							</table>
+							<!-- PAGE CONTENT ENDS -->
+							
+							
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.page-content -->
+				
+				<div class="page-content">
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- PAGE CONTENT BEGINS -->
+							FileUpload Example ===========================================================
+							<h4>您所选择的文件列表：</h4>
+							<div id="fileUploadContent" class="fileUploadContent" >
+								<div class="uploadBts">
+									<a id="selectfiles" href="javascript:void(0);" class='selectFileBt btn btn-success btn-xs'>选择文件</a>
+								</div>
+								
+								<ul id="existsossfile" class="box">
+									 <@_file.li_file "3,4","xxxFileid" />	
+								</ul>
+								
+								<ul id="ossfile" class="box">
+								</ul>
+							</div>
+
+							<!-- PAGE CONTENT ENDS -->
+							<script type="text/javascript" src="/static/assets/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+							<script type="text/javascript" src="/static/assets/common/upload.js"></script>	
+
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+				
+			</div>
+			<!-- /.main-content -->
+			
+		</div>
+		<!-- /.main-container-inner -->
+
+		<a href="#" id="btn-scroll-up"
+			class="btn-scroll-up btn btn-sm btn-inverse"> <i
+			class="icon-double-angle-up icon-only bigger-110"></i>
+		</a>
+	</div>
+	<!-- /.main-container --> 
+	
+	<#include "/html/include/footer.html" />
+<script type="text/javascript" src="/static/assets/common/chosen-tool-select.js"></script>	
+
+
+<script>
+$(function() {
+	$("#ossfile").empty();
+	
+	simple_uploadX("ossfile","测试附件", "*", "fileid"	);	
+	
+	//行政区域单选
+	$('#chooseArea').selectCity({
+	});
+	
+	//行业选择	
+	$('#chooseIndustry').selectCity({
+		id: 10303000,
+		url: '/industry/getTypeList',  
+		getChildUrl: ' /industry/getChildren'
+	});
+});
+
+function yearReport(){
+	$.ajax({
+		url : '/yearReport',
+		type : 'post',
+		dataType : 'json',
+		success : function(res) {
+			alertDiag(res.data);			
+		}
+	});
+}
+function rawData(){
+	$.ajax({
+		url : '/rawData',
+		type : 'post',
+		dataType : 'json',
+		success : function(res) {
+			alertDiag(res.data);			
+		}
+	});
+}
+function projectReport(){
+	$.ajax({
+		url : '/projectReport',
+		type : 'post',
+		dataType : 'json',
+		success : function(res) {
+			alertDiag(res.data);			
+		}
+	});
+}
+</script>	
+
+	
+</body>
+</html>

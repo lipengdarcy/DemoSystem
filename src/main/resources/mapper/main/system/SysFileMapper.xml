@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="cn.smarthse.business.dao.system.SysFileMapper">
+
+	<resultMap id="BaseResultMap" type="cn.smarthse.business.entity.system.SysFile">
+        <result property="id" column="ID"/>
+        <result property="url" column="url"/>
+        <result property="fileName" column="file_name"/>
+        <result property="fileSize" column="file_size"/>
+        <result property="description" column="description"/>
+        <result property="md5" column="md5"/>
+        <result property="cid" column="cid"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="isValid" column="is_valid"/>
+        <result property="mimeType" column="mime_type"/>
+	</resultMap>
+	
+</mapper>
+

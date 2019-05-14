@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smarthse.backup.dao.hotel.HotelDataMapper">
+	<resultMap id="BaseResultMap" type="cn.smarthse.backup.entity.hotel.HotelData">
+		<result column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="Name" jdbcType="VARCHAR" property="name" />
+		<result column="CardNo" jdbcType="VARCHAR" property="cardno" />
+		<result column="Descriot" jdbcType="VARCHAR" property="descriot" />
+		<result column="CtfTp" jdbcType="VARCHAR" property="ctftp" />
+		<result column="CtfId" jdbcType="VARCHAR" property="ctfid" />
+		<result column="Gender" jdbcType="VARCHAR" property="gender" />
+		<result column="Birthday" jdbcType="VARCHAR" property="birthday" />
+		<result column="Address" jdbcType="VARCHAR" property="address" />
+		<result column="Zip" jdbcType="VARCHAR" property="zip" />
+		<result column="Dirty" jdbcType="VARCHAR" property="dirty" />
+		<result column="District1" jdbcType="VARCHAR" property="district1" />
+		<result column="District2" jdbcType="VARCHAR" property="district2" />
+		<result column="District3" jdbcType="VARCHAR" property="district3" />
+		<result column="District4" jdbcType="VARCHAR" property="district4" />
+		<result column="District5" jdbcType="VARCHAR" property="district5" />
+		<result column="District6" jdbcType="VARCHAR" property="district6" />
+		<result column="FirstNm" jdbcType="VARCHAR" property="firstnm" />
+		<result column="LastNm" jdbcType="VARCHAR" property="lastnm" />
+		<result column="Duty" jdbcType="VARCHAR" property="duty" />
+		<result column="Mobile" jdbcType="VARCHAR" property="mobile" />
+		<result column="Tel" jdbcType="VARCHAR" property="tel" />
+		<result column="Fax" jdbcType="VARCHAR" property="fax" />
+		<result column="EMail" jdbcType="VARCHAR" property="email" />
+		<result column="Nation" jdbcType="VARCHAR" property="nation" />
+		<result column="Taste" jdbcType="VARCHAR" property="taste" />
+		<result column="Education" jdbcType="VARCHAR" property="education" />
+		<result column="Company" jdbcType="VARCHAR" property="company" />
+		<result column="CTel" jdbcType="VARCHAR" property="ctel" />
+		<result column="CAddress" jdbcType="VARCHAR" property="caddress" />
+		<result column="CZip" jdbcType="VARCHAR" property="czip" />
+		<result column="Family" jdbcType="VARCHAR" property="family" />
+		<result column="Version" jdbcType="TIMESTAMP" property="version" />
+	</resultMap>
+	
+</mapper>
