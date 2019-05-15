@@ -30,7 +30,7 @@
 		<mapper.starter.version>2.0.3-beta1</mapper.starter.version>
 		<shiro.version>1.4.0</shiro.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
-		<commons-fileupload.version>1.3.1</commons-fileupload.version>
+		<commons-fileupload.version>1.3.2</commons-fileupload.version>
 		<joda-time.version>2.9.9</joda-time.version>
 		<springfox.version>2.8.0</springfox.version>
 
@@ -39,7 +39,7 @@
 
 	<dependencies>
 
-		<!-- springboot 全家桶开始 -->
+		<!-- 1.springboot 全家桶开始 -->
 
 		<!-- Spring Boot Web 依赖 -->
 		<dependency>
@@ -146,14 +146,13 @@
 
 
 
-
+		<!-- 2.通用依赖包开始 -->
 		<!-- @Data注解，pojo省略set，get方法 -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
@@ -163,13 +162,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.1.34</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>1.0.13</version>
+			<version>1.2.31</version>
 		</dependency>
 
 		<!-- mysql jdbc driver -->
@@ -194,7 +187,7 @@
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
-			<version>1.3.1</version>
+			<version>1.3.3</version>
 		</dependency>
 
 		<!-- MySQL 连接驱动依赖 -->
@@ -206,39 +199,14 @@
 		<!-- Druid 数据连接池依赖 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>${druid.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
 			<version>${druid.version}</version>
 		</dependency>
 
-
-
-		<!--mongodb -->
-
-		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<!-- httpclient -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-		</dependency>
-
-		<!-- Spring Boot JMS 依赖 -->
-
-		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.1.34</version>
 		</dependency>
 
 		<!-- Apache Shiro Java Security Framework -->
@@ -262,7 +230,8 @@
 			<artifactId>shiro-ehcache</artifactId>
 			<version>${shiro.version}</version>
 		</dependency>
-		<!-- freemarker + shiro（标签） begin -->
+
+		<!-- freemarker + shiro（标签） -->
 		<dependency>
 			<groupId>net.mingsoft</groupId>
 			<artifactId>shiro-freemarker-tags</artifactId>
@@ -278,7 +247,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- freemarker + shiro（标签） begin -->
 
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
@@ -317,17 +285,11 @@
 			<version>3.2.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<!-- jsonwebtoken -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.7.0</version>
-		</dependency>
-
-		<!-- project lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
 		</dependency>
 
 		<!-- persistence -->
@@ -436,17 +398,9 @@
 		</dependency>
 
 		<!-- ik中文分词 -->
-		<!-- <dependency>
-			<groupId>com.janeluo</groupId>
-			<artifactId>ikanalyzer</artifactId>
-			<version>2012_u6</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.lucene</groupId>
-					<artifactId>lucene-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.janeluo</groupId> <artifactId>ikanalyzer</artifactId> 
+			<version>2012_u6</version> <exclusions> <exclusion> <groupId>org.apache.lucene</groupId> 
+			<artifactId>lucene-core</artifactId> </exclusion> </exclusions> </dependency> -->
 
 
 		<!-- 8.0后就不用TransportClient啦 ，统一用elasticsearch-rest-high-level-client -->
