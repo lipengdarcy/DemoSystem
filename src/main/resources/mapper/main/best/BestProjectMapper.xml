@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="cn.smarthse.business.dao.best.BestProjectMapper">
+
+	<resultMap id="BaseResultMap" type="cn.smarthse.business.entity.best.BestProject">
+        <result property="id" column="id"/>
+        <result property="subCompany" column="sub_company"/>
+        <result property="projectName" column="project_name"/>
+        <result property="beginTime" column="begin_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="manager" column="manager"/>
+        <result property="contractNo" column="contract_no"/>
+        <result property="contractType" column="contract_type"/>
+        <result property="serverCompany" column="server_company"/>
+        <result property="actualUser" column="actual_user"/>
+        <result property="sealDate" column="seal_date"/>
+        <result property="startReceive" column="start_receive"/>
+        <result property="contractBack" column="contract_back"/>
+        <result property="product" column="product"/>
+        <result property="memberFee" column="member_fee"/>
+        <result property="implementFee" column="implement_fee"/>
+        <result property="flowFee" column="flow_fee"/>
+        <result property="actualFee" column="actual_fee"/>
+        <result property="memberTime" column="member_time"/>
+        <result property="implementTime" column="implement_time"/>
+        <result property="flowTime" column="flow_time"/>
+        <result property="memberFinishPercent" column="member_finish_percent"/>
+        <result property="contractAchiveNo" column="contract_achive_no"/>
+        <result property="billing" column="billing"/>
+        <result property="mailAddress" column="mail_address"/>
+        <result property="a1" column="a1"/>
+        <result property="a2" column="a2"/>
+        <result property="a3" column="a3"/>
+        <result property="a4" column="a4"/>
+        <result property="a5" column="a5"/>
+        <result property="a6" column="a6"/>
+        <result property="a7" column="a7"/>
+        <result property="a8" column="a8"/>
+        <result property="a9" column="a9"/>
+        <result property="a10" column="a10"/>
+        <result property="a11" column="a11"/>
+        <result property="a12" column="a12"/>
+        <result property="a13" column="a13"/>
+        <result property="a14" column="a14"/>
+        <result property="a15" column="a15"/>
+        <result property="a16" column="a16"/>
+        <result property="a17" column="a17"/>
+        <result property="a18" column="a18"/>
+        <result property="a19" column="a19"/>
+        <result property="a20" column="a20"/>
+        <result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="query" parameterType="map" resultMap="BaseResultMap">
+		SELECT * FROM best_project a
+		where 1=1
+		<if test=" subCompany != null and subCompany !='' ">
+			and a.sub_company like CONCAT('%',#{subCompany},'%')
+		</if>
+		<if test=" projectName != null and projectName !='' ">
+			and a.project_name like CONCAT('%',#{projectName},'%')
+		</if>
+	</select>
+	
+</mapper>
+

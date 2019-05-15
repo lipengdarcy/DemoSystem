@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smarthse.business.dao.best.YouOrderMapper">
+
+	<resultMap id="BaseResultMap" type="cn.smarthse.business.entity.best.YouOrder">
+		<result property="id" column="id" />
+		<result property="domainName" column="domain_name" />
+		<result property="domainCode" column="domain_code" />
+		<result property="createTime" column="create_time" />
+		<result property="useDayCount" column="use_day_count" />
+		<result property="activeCount" column="active_count" />
+		<result property="saleCountTolal" column="sale_count_tolal" />
+		<result property="saleCountProgram" column="sale_count_program" />
+		<result property="saleValue" column="sale_value" />
+		<result property="saleStockoutCountTotal" column="sale_stockout_count_total" />
+		<result property="saleStockoutCountProgram" column="sale_stockout_count_program" />
+		<result property="saleStockoutValue" column="sale_stockout_value" />
+		<result property="purchaseCount" column="purchase_count" />
+		<result property="purchaseValue" column="purchase_value" />
+		<result property="purchaseStockinCount" column="purchase_stockin_count" />
+		<result property="purchaseStockinValue" column="purchase_stockin_value" />
+		<result property="stockinCount" column="stockin_count" />
+		<result property="stockoutCount" column="stockout_count" />
+		<result property="activeJobCount" column="active_job_count" />
+		<result property="stockReportCount" column="stock_report_count" />
+		<result property="otherPayValue" column="other_pay_value" />
+		<result property="mainPayValue" column="main_pay_value" />
+		<result property="mainReceiveValue" column="main_receive_value" />
+		<result property="otherReceiveValue" column="other_receive_value" />
+		<result property="innerTransferValue" column="inner_transfer_value" />
+		<result property="adjustValue" column="adjust_value" />
+		<result property="orderCount" column="order_count" />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="query" parameterType="map" resultMap="BaseResultMap">
+		SELECT * FROM you_order a
+		where 1=1
+		<if test=" domainName != null and domainName !='' ">
+			and a.domain_name like CONCAT('%',#{domainName},'%')
+		</if>
+	</select>
+
+</mapper>
+

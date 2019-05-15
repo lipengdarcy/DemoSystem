@@ -26,7 +26,7 @@
 				</a>
 			</li>
 
-			<li class="menu-list">
+			<li class="menu-list <#if nav?contains('/system')>nav-active</#if>">
 				<a href="#">
 					<i class="icon-layers"></i>
 					<span>系统管理</span>
@@ -44,10 +44,32 @@
 	
 				</ul>
 			</li>
+			
+			<li >
+			<li class="menu-list <#if nav?contains('/best')>nav-active</#if>">
+				<a href="#">
+					<i class="icon-layers"></i>
+					<span>Best ZQ</span>
+				</a>
+				<ul class="sub-menu-list">
+					<li <#if nav=='/best/BestContract'>class="active"</#if>>
+						<a href="/best/BestContract">代理协议</a>
+					</li>
+					<li <#if nav=='/best/BestProject'>class="active"</#if>>
+						<a href="/best/BestProject">产品信息</a>
+					</li>
+					<li <#if nav=='/best/TnetOrder'>class="active"</#if>>
+						<a href="/best/TnetOrder">tnet周单量</a>
+					</li>
+					<li <#if nav=='/best/YouOrder'>class="active"</#if>>
+						<a href="/best/YouOrder">优赢日单量</a>
+					</li>
+				</ul>
+			</li>
 
 			
 
-			<li class="menu-list">
+			<li class="menu-list <#if nav?contains('/work')>nav-active</#if>">
 				<a href="#">
 					<i class="icon-envelope-open"></i>
 					<span>我的工作</span>

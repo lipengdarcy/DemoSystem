@@ -8,6 +8,7 @@ function jqgridInit() {
 			.jqGrid(
 					{
 						url : '/wechat/user/userData',
+						styleUI : 'Bootstrap',
 						datatype : "json",
 						colModel : [
 								{
@@ -40,7 +41,8 @@ function jqgridInit() {
 									name : 'avatar',
 									formatter : function(cellvalue, options,
 											rowObject) {
-										var link = '<img height="50px;" width="50px;" src="' + cellvalue
+										var link = '<img height="50px;" width="50px;" src="'
+												+ cellvalue
 												+ '" alt="微信头像" title="微信头像">';
 										return link;
 									}
@@ -51,7 +53,7 @@ function jqgridInit() {
 								} ],
 						viewrecords : true,
 						height : 'auto',
-						autoheight : true,
+						autowidth : true,// 宽度自适应
 						rownumbers : true,
 						rowNum : 10,
 						rowList : [ 10, 20, 30 ],

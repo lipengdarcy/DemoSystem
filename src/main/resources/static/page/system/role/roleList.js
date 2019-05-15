@@ -1,25 +1,6 @@
-$(window).resize(function() {
-	initLayout();
-});
-
 $(function() {
 	jqgridInit();
 });
-
-/**
- * 在窗口缩放的时候，我们为jqGrid重新绘制宽度，使其自适应于bootstrap的响应式布局。
- * 使用的方法就是jqGrid的setGridWidth方法。
- * */
-function initLayout() {
-	$("table[rel=jqgridForm]").each(function() {
-		var rel = $(this).attr("rel");
-		if (rel) {
-			var $form = $("#" + rel);
-			var tableWidth = $form.width();
-			$(this).setGridWidth(tableWidth, true);
-		}
-	});
-}
 
 function jqgridInit() {
 	$("#jqGrid").jqGrid({

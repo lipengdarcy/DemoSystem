@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="cn.smarthse.business.dao.best.TnetOrderMapper">
+
+	<resultMap id="BaseResultMap" type="cn.smarthse.business.entity.best.TnetOrder">
+        <result property="id" column="id"/>
+        <result property="domainName" column="domain_name"/>
+        <result property="companyName" column="company_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="commitCount" column="commit_count"/>
+        <result property="finishCount" column="finish_count"/>
+        <result property="jfCount" column="jf_count"/>
+        <result property="czCount" column="cz_count"/>
+        <result property="mobileCount" column="mobile_count"/>
+        <result property="smartCount" column="smart_count"/>
+        <result property="weixinCount" column="weixin_count"/>
+        <result property="upPartnerCount" column="up_partner_count"/>
+        <result property="downPartnerCount" column="down_partner_count"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="query" parameterType="map" resultMap="BaseResultMap">
+		SELECT * FROM tnet_order a
+		where 1=1
+		<if test=" companyName != null and companyName !='' ">
+			and a.company_name like CONCAT('%',#{companyName},'%')
+		</if>
+	</select>
+	
+</mapper>
+

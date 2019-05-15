@@ -58,7 +58,7 @@ spring:
       #stat-view-servlet.enabled: true  #是否启用StatViewServlet默认值true
   
     # 默认数据源
-    url: jdbc:mysql://localhost:3306/DemoSystem?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/DemoSystem?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
     username: root
     password: 123456
     #localhost

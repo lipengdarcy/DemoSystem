@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<#include "/html/include/meta.html">
+<title>优赢日单量</title>
+</head>
+
+<body class="sticky-header">
+
+	<#include "/html/include/menu.html"> 
+	
+	<div class="main-content">
+
+		<#include "/html/include/header.html"> 
+
+		<div class="wrapper">
+
+			<!--Start Page Title-->
+			<div class="page-title-box">
+				<h4 class="page-title">优赢日单量</h4>
+				<div class="clearfix"></div>
+			</div>
+			<!--End Page Title-->
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="white-box">
+
+						<form id="searchForm" class="form-horizontal">
+							<div class="form-group">								
+								
+								<label class="col-md-2 control-label">公司名称</label>
+								<div class="col-md-2">
+									<input class="form-control" name="companyName" type="text">
+								</div>	
+								
+								<div class="col-md-3">
+								</div>																
+								
+								<div class="col-md-1">
+									<button type="button" onclick="searchForm();" class="btn btn-primary">搜索</button>
+								</div>
+			
+							</div>													
+						</form>						
+					</div>					
+				</div>
+			</div>
+
+			<!--Start row-->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="white-box">
+						<table id="jqGrid" rel="jqgridForm"></table>
+						<div id="jqGridPager"></div>
+					</div>
+				</div>
+			</div>
+			<!--End row-->
+
+		</div>
+		<!-- End Wrapper--> 
+		
+		<#include "/html/include/footer.html"> 
+		<script type="text/javascript" src="/static/page/best/YouOrder.js"></script>
+		
+	</div>
+	<!--End main content -->		
+</body>
+
+</html>

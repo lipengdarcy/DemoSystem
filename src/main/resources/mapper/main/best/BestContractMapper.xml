@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smarthse.business.dao.best.BestContractMapper">
+
+	<resultMap id="BaseResultMap" type="cn.smarthse.business.entity.best.BestContract">
+		<result property="id" column="id" />
+		<result property="subCompany" column="sub_company" />
+		<result property="projectName" column="project_name" />
+		<result property="beginTime" column="begin_time" />
+		<result property="endTime" column="end_time" />
+		<result property="manager" column="manager" />
+		<result property="contractNo" column="contract_no" />
+		<result property="contractType" column="contract_type" />
+		<result property="sealDate" column="seal_date" />
+		<result property="isBack" column="is_back" />
+		<result property="agentPolicy" column="agent_policy" />
+		<result property="memberFee" column="member_fee" />
+		<result property="implementFee" column="implement_fee" />
+		<result property="flowFee" column="flow_fee" />
+		<result property="actualFee" column="actual_fee" />
+		<result property="memberTime" column="member_time" />
+		<result property="implementTime" column="implement_time" />
+		<result property="flowTime" column="flow_time" />
+		<result property="contractAchiveNo" column="contract_achive_no" />
+		<result property="mailAddress" column="mail_address" />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+
+	<!-- 查询列表 -->
+	<select id="query" parameterType="map" resultMap="BaseResultMap">
+		SELECT * FROM best_contract a
+		where 1=1
+		<if test=" subCompany != null and subCompany !='' ">
+			and a.sub_company like CONCAT('%',#{subCompany},'%')
+		</if>
+		<if test=" projectName != null and projectName !='' ">
+			and a.project_name like CONCAT('%',#{projectName},'%')
+		</if>
+	</select>
+
+</mapper>
+

@@ -11,6 +11,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import cn.smarthse.business.interceptor.LogInterceptor;
+import cn.smarthse.framework.context.interceptor.ShiroAuthInterceptor;
+
 /**
  * Web配置器
  * 
@@ -21,6 +24,10 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
 	private Logger log = LogManager.getLogger(this.getClass());
 
 	public void addInterceptors(InterceptorRegistry registry) {
+		log.info("配置 日志拦截器");
+		registry.addInterceptor(new LogInterceptor()).addPathPatterns("/**");
+		log.info("配置 权限拦截器");
+		registry.addInterceptor(new ShiroAuthInterceptor()).addPathPatterns("/**");
 		super.addInterceptors(registry);
 	}
 

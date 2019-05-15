@@ -32,12 +32,7 @@ import cn.smarthse.framework.util.StringUtils;
 
 /**
  * 
- * 《日志拦截器》
- * 
- * 
- * @Module ID: <(模块)类编号，可以引用系统设计中的类编号>
- * @Comments: <对此类的描述，可以引用系统设计中的描述>
- * @author JannyShao(邵建义) [ksgameboy@qq.com]
+ * 日志拦截器
  */
 public class LogInterceptor implements HandlerInterceptor {
 	private Logger logger = LogManager.getLogger(this.getClass());
@@ -86,9 +81,9 @@ public class LogInterceptor implements HandlerInterceptor {
 		Object principal = subject.getPrincipal();
 		//
 		if (modelAndView != null) {
-			logger.info("getRequestURI: {}, ViewName: {}", request.getRequestURI(), modelAndView.getViewName());
+			logger.debug("getRequestURI: {}, ViewName: {}", request.getRequestURI(), modelAndView.getViewName());
 		} else {
-			logger.info("getRequestURI: {}", request.getRequestURI());
+			logger.debug("getRequestURI: {}", request.getRequestURI());
 		}
 
 		// 当前登录用户
@@ -99,23 +94,17 @@ public class LogInterceptor implements HandlerInterceptor {
 			// 取父级
 			String parentNav = nav.substring(0, nav.lastIndexOf("/"));
 			// 请求的URL
-			logger.info(">>>[Inteceptor] request:" + nav + ", parentNav=" + parentNav);
+			logger.debug(">>>[Inteceptor] request:" + nav + ", parentNav=" + parentNav);
 			modelAndView.addObject("nav", nav);
 			modelAndView.addObject("parentNav", parentNav);
 
 			// TODO
 			String contextPath = request.getContextPath();
-			HttpSession session = request.getSession();
 
 			ShiroPrincipal adminPrincipal = (ShiroPrincipal) subject.getPrincipal();
 			modelAndView.addObject("user", adminPrincipal.getUser());
 
 			modelAndView.addObject("contextPath", contextPath);
-			// <c:set var="ctx"
-			// value="//${header['host']}${pageContext.request.contextPath}"/>
-			// ${#httpServletRequest.getScheme() + '://' +
-			// #httpServletRequest.getServerName() + ':' + #request.getServerPort() +
-			// #request.getContextPath() + '/'}
 			String ctx = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 					+ contextPath;
 			modelAndView.addObject("ctx", ctx);
