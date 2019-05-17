@@ -62,7 +62,7 @@ function login() {
 				window.location.href = res.data.home;
 			} else {
 				$('#password').val('');
-				alertDiag(res.message);
+				alert(res.message);
 			}
 		}
 	});

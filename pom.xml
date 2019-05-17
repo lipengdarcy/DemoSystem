@@ -392,22 +392,47 @@
 
 
 		<!-- 全文搜索：elasticsearch：6.4.3 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-		</dependency>
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-elasticsearch</artifactId> 
+			<exclusions> <exclusion> <groupId>org.elasticsearch</groupId> <artifactId>elasticsearch</artifactId> 
+			</exclusion> <exclusion> <groupId>org.elasticsearch.plugin</groupId> <artifactId>transport-netty4-client</artifactId> 
+			</exclusion> <exclusion> <groupId>org.elasticsearch.client</groupId> <artifactId>transport</artifactId> 
+			</exclusion> </exclusions> </dependency> -->
 
 		<!-- ik中文分词 -->
 		<!-- <dependency> <groupId>com.janeluo</groupId> <artifactId>ikanalyzer</artifactId> 
 			<version>2012_u6</version> <exclusions> <exclusion> <groupId>org.apache.lucene</groupId> 
 			<artifactId>lucene-core</artifactId> </exclusion> </exclusions> </dependency> -->
 
+		<dependency>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+			<version>7.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.elasticsearch.plugin</groupId>
+			<artifactId>transport-netty4-client</artifactId>
+			<version>7.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>transport</artifactId>
+			<version>7.0.0</version>
+		</dependency>
+
 
 		<!-- 8.0后就不用TransportClient啦 ，统一用elasticsearch-rest-high-level-client -->
 		<dependency>
 			<groupId>org.elasticsearch.client</groupId>
 			<artifactId>elasticsearch-rest-high-level-client</artifactId>
-			<!-- <version>7.0.0</version> -->
+			<version>7.0.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.elasticsearch</groupId>
+					<artifactId>elasticsearch</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 
