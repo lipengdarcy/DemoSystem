@@ -55,6 +55,7 @@ function jqgridInit() {
 						height : 'auto',
 						autowidth : true,// 宽度自适应
 						rownumbers : true,
+						rownumWidth : 50,// 序号列宽度
 						rowNum : 10,
 						rowList : [ 10, 20, 30 ],
 						pager : "#jqGridPager",
