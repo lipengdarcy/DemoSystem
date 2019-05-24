@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.smarthse.backup.entity.hotel.HotelData;
 import cn.smarthse.backup.model.hotel.HotelDataModel;
 import cn.smarthse.backup.service.hotel.HotelDataService;
+import cn.smarthse.business.service.mongo.BatchInsertTestService;
 import cn.smarthse.framework.model.JqGridData;
 import cn.smarthse.framework.model.JqGridParam;
 
@@ -19,9 +20,17 @@ public class HotelDataController {
 	@Autowired
 	private HotelDataService HotelDataService;
 
+	@Autowired
+	private BatchInsertTestService BatchInsertTestService;
+
 	@RequestMapping()
-	public String init(ModelMap m) {
+	public String index(ModelMap m) {
 		return "mongo/hotelList";
+	}
+
+	@RequestMapping("/init")
+	public void init() {
+		BatchInsertTestService.batchInsert();
 	}
 
 	@RequestMapping("/getData")
@@ -30,7 +39,7 @@ public class HotelDataController {
 		JqGridData<HotelData> list = HotelDataService.queryData(param, dataParam);
 		return list;
 	}
-	
+
 	@RequestMapping("/getMongoData")
 	@ResponseBody
 	public JqGridData<HotelData> getMongoData(JqGridParam param, HotelDataModel dataParam) {

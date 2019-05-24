@@ -36,5 +36,12 @@
 		<result column="Family" jdbcType="VARCHAR" property="family" />
 		<result column="Version" jdbcType="TIMESTAMP" property="version" />
 	</resultMap>
-	
+
+
+	<!-- 分页查询，每次返回固定的条目，因为总数太多啦 -->
+	<select id="getPage" parameterType="map" resultMap="BaseResultMap">
+		SELECT * FROM
+		hotel_data limit #{index}, #{count}
+	</select>
+
 </mapper>

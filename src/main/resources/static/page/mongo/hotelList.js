@@ -61,13 +61,12 @@ $(function() {
 
 });
 
-// 查询
-function query() {
-	var data = {
-		name : $("#name").val()
-	};
-	var postData = $("#grid_table").jqGrid("getGridParam", "postData");
-	// 将查询参数融入postData选项对象
-	$.extend(postData, data);
-	$("#grid_table").jqGrid('setGridParam').trigger("reloadGrid");
+
+//查询
+function searchForm() {
+	$("#jqGrid").jqGrid("setGridParam", {
+		search : true,
+		page : 1,
+		postData : $("#searchForm").serializeObject(),
+	}).trigger("reloadGrid");
 }

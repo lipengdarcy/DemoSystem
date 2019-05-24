@@ -29,9 +29,10 @@ server:
 logging:
   level: 
     root: info
-    cn.smarthse.business.controller: debug
-    cn.smarthse.business.service: debug
-    cn.smarthse.business.dao: debug
+    cn.smarthse.business.controller: DEBUG
+    cn.smarthse.business.service: DEBUG
+    cn.smarthse.business.dao: DEBUG
+    org.springframework.data.mongodb.core: DEBUG
   file: log/SpringBoot.log
 
 
