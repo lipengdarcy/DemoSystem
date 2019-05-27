@@ -12,8 +12,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import cn.smarthse.business.dao.mongo.MongoAreaDao;
 import cn.smarthse.business.entity.system.SysAreaStandard;
+import cn.smarthse.business.repository.system.MongoAreaDao;
 import cn.smarthse.framework.model.JqGridData;
 import cn.smarthse.framework.model.JqGridParam;
 import cn.smarthse.framework.util.StringUtil;
