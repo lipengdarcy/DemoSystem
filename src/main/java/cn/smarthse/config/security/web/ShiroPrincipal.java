@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.smarthse.business.model.system.SysUserModel;
+import cn.smarthse.business.collection.system.SystemUser;
 import lombok.Data;
 
 /**
@@ -14,7 +14,7 @@ public @Data class ShiroPrincipal implements Serializable {
 	private static final long serialVersionUID = 1428196040744555722L;
 
 	// 用户对象
-	private SysUserModel user;
+	private SystemUser user;
 
 	// 用户权限列表
 	private List<String> permissionList = new ArrayList<String>();
@@ -33,7 +33,7 @@ public @Data class ShiroPrincipal implements Serializable {
 	 * 
 	 * @param user
 	 */
-	public ShiroPrincipal(SysUserModel user) {
+	public ShiroPrincipal(SystemUser user) {
 		this.user = user;
 	}
 
@@ -49,7 +49,7 @@ public @Data class ShiroPrincipal implements Serializable {
 		return null;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return this.user.getId();
 	}
 

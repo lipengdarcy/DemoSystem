@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.smarthse.business.collection.system.SystemUser;
+import cn.smarthse.business.collection.system.UserJob;
 import cn.smarthse.business.entity.system.SysUser;
+import cn.smarthse.business.service.mongo.system.SystemUserService;
 import cn.smarthse.config.security.web.ShiroFormAuthenticationFilter;
 import cn.smarthse.config.security.web.ShiroUtil;
 import cn.smarthse.framework.interceptor.log.Log;
@@ -37,11 +41,16 @@ public class LoginController extends ControllerSupport {
 	private final String basePath = "security/";
 
 	private final String info_prefix = "[登录模块]";
+	
+	
+	@Autowired
+	SystemUserService SystemUserService;
 
 	@GetMapping("login")
 	public String login(ModelMap model, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		logger.info("{}-登录页", info_prefix);
+		//addUser();
 		// 若已登录,回到首页
 		if (ShiroUtil.getUserModel() != null) {
 			WebUtils.redirectToSavedRequest(request, response, "/");
@@ -50,6 +59,13 @@ public class LoginController extends ControllerSupport {
 		String usernameCookie = CookieUtil.getCookie(request, ShiroFormAuthenticationFilter.COOKIE_LOGIN_USERNAME);
 		model.addAttribute("cookie_username", usernameCookie);
 		return basePath + "login";
+	}
+	
+	private void addUser() {
+		SystemUser user = new SystemUser();
+		user.setUserName("admin");
+		UserJob job = new UserJob();
+		SystemUserService.addUser(user);
 	}
 
 	/**

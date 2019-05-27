@@ -76,8 +76,7 @@ public class FileUploadController extends ControllerSupport {
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
 	public ResponseData<SysFile> ajax_upload(String filehash, HttpServletRequest req) throws Exception {
 		logger.info("{}->【上传{}】", info_prefix, filehash);
-		// 当前登录用户 ID
-		Integer loginUserId = ShiroUtil.getLoginUserId();
+
 		// 当前用户所在企业
 		Integer cid = ShiroUtil.getLoginCid() != null ? ShiroUtil.getLoginCid() : 0;
 
@@ -277,7 +276,7 @@ public class FileUploadController extends ControllerSupport {
 		logger.info("{}->【生成直传签名】", info_prefix);
 		// 0.
 		// //当前登录用户 ID
-		Integer loginUserId = ShiroUtil.getLoginUserId() != null ? ShiroUtil.getLoginUserId() : 0;
+		String loginUserId = ShiroUtil.getLoginUserId() != null ? ShiroUtil.getLoginUserId() : "";
 		// 当前用户所在企业
 		Integer cid = ShiroUtil.getLoginCid() != null ? ShiroUtil.getLoginCid() : 0;
 

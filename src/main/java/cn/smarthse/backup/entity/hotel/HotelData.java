@@ -10,6 +10,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 
+ * 如家入住记录
+ */
 @Table(name = "hotel_data")
 public @Data class HotelData {
 

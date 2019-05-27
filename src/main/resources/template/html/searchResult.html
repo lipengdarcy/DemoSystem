@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<!-- 允许跨域调用js -->
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<#include "/html/include/meta.html">
+<title>查询结果</title>
+</head>
+
+<body class="sticky-header">
+
+	<#include "/html/include/menu.html"> 
+	
+	<div class="main-content">
+
+		<#include "/html/include/header.html">
+
+		<div class="wrapper">
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="white-box">
+
+						<div id="searchbox" class="search-box-top">
+							<form action="/">
+								<div class="input-group">
+									<input id="global_keyword" name="keyword" class="form-control input-search" placeholder="搜索..." type="text">
+									<span class="input-group-btn">
+										<button class="btn btn-primary" type="submit">
+											<i class="fa fa-search"></i>
+										</button>
+									</span>
+								</div>
+							</form>
+						</div>
+
+						<div id="resultbox"></div>
+						
+						
+						<ul class="pagination m-t-30">
+							<li>
+								<a href="#" aria-label="Previous">
+									<span aria-hidden="true">«</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">1</a>
+							</li>
+							<li class="active">
+								<a href="#">2</a>
+							</li>
+							<li>
+								<a href="#">3</a>
+							</li>
+							<li>
+								<a href="#">4</a>
+							</li>
+							<li>
+								<a href="#">5</a>
+							</li>
+							<li>
+								<a href="#">6</a>
+							</li>
+							<li>
+								<a href="#" aria-label="Next">
+									<span aria-hidden="true">»</span>
+								</a>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+		<!-- End Wrapper--> 
+		
+		<#include "/html/include/footer.html"> 
+		<script type='text/javascript' src='/static/assets/js/elasticsearch-js/elasticsearch.jquery.min.js'></script>
+		<script type="text/javascript" src="/static/page/search.js"></script>
+		
+	</div>
+	<!--End main content -->		
+</body>
+
+</html>

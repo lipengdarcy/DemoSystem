@@ -35,17 +35,15 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import cn.smarthse.business.model.elasticsearch.Commodity;
+import cn.smarthse.business.model.elasticsearch.SysArea;
 import cn.smarthse.business.model.elasticsearch.common.ElasticsearchResponseData;
 import cn.smarthse.business.service.elasticsearch.ElasticSearchService;
 import cn.smarthse.framework.util.JsonMapper;
 
-//@Service
+@Service
 public class ElasticSearchServiceImpl implements ElasticSearchService {
 
 	static final String INDEX_NAME = "my_index_name";
-
-	static final String INDEX_TYPE = "my_index_type";
 
 	RequestOptions option;
 
@@ -69,7 +67,7 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
 	 *             IO异常
 	 */
 	private void saveDocument(String id, String documentJson) throws IOException {
-		IndexRequest request = new IndexRequest(INDEX_NAME, INDEX_TYPE, id);
+		IndexRequest request = new IndexRequest(INDEX_NAME);
 		request.source(documentJson, XContentType.JSON);
 		restClient.index(request, option);
 	}
@@ -83,7 +81,7 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
 	 *             IO异常
 	 */
 	private GetResponse getDocument(String id) throws IOException {
-		GetRequest getRequest = new GetRequest(INDEX_NAME, INDEX_TYPE, id);
+		GetRequest getRequest = new GetRequest(INDEX_NAME, id);
 		return restClient.get(getRequest, option);
 	}
 
@@ -97,7 +95,7 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
 	 *             IO异常
 	 */
 	private DeleteResponse deleteDocument(String id) throws IOException {
-		DeleteRequest request = new DeleteRequest(INDEX_NAME, INDEX_TYPE, id);
+		DeleteRequest request = new DeleteRequest(INDEX_NAME, id);
 		return restClient.delete(request, option);
 	}
 
@@ -113,7 +111,7 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
 	 *             IO异常
 	 */
 	private UpdateResponse updateDocument(String id, String contentJson) throws IOException {
-		UpdateRequest updateRequest = new UpdateRequest(INDEX_NAME, INDEX_TYPE, id);
+		UpdateRequest updateRequest = new UpdateRequest(INDEX_NAME, id);
 		updateRequest.doc(contentJson, XContentType.JSON);
 		return restClient.update(updateRequest, option);
 	}
@@ -240,7 +238,7 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
 		Stream<SearchHit> stream = Arrays.stream(searchResponse.getHits().getHits());
 
 		List<ElasticsearchResponseData> list = stream.map(this::fromSearchHit).collect(Collectors.toList());
-		return new PageImpl<>(list, pageable, searchResponse.getHits().getTotalHits());
+		return new PageImpl<ElasticsearchResponseData>(list);
 	}
 
 	/**
@@ -271,11 +269,9 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
 	}
 
 	public IndexRequest generateNewsRequest(String name, String category, String publishTime) {
-		IndexRequest indexRequest = new IndexRequest(INDEX_NAME, INDEX_TYPE);
-		Commodity a = new Commodity();
+		IndexRequest indexRequest = new IndexRequest(INDEX_NAME);
+		SysArea a = new SysArea();
 		a.setName(name);
-		a.setCategory(category);
-		a.setSkuId(publishTime);
 		String source = JsonMapper.toJsonString(a);
 		indexRequest.source(source, XContentType.JSON);
 		return indexRequest;

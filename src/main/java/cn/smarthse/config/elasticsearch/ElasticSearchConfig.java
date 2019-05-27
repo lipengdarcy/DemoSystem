@@ -53,14 +53,13 @@ public class ElasticSearchConfig {
 		client.addTransportAddress(node);
 		// client.addTransportAddress(node1);
 		// client.addTransportAddress(node2);
-		logger.info("配置 ElasticSearchConfig，地址：" + clusterNodes);
+		logger.info("ElasticSearchConfig，配置地址：" + clusterNodes);
 		return client;
 	}
 
-
 	@Bean(initMethod = "init", destroyMethod = "close")
 	public ESClientSpringFactory getFactory() {
-		logger.info("配置 ElasticSearchConfig: HttpHost");
+		logger.info("ElasticSearchConfig: 配置 ESClientSpringFactory");
 		return ESClientSpringFactory.build(clusterNodes);
 	}
 

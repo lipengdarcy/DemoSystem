@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<#include "/html/include/meta.html">
+<title>查询结果</title>
+</head>
+
+<body class="sticky-header">
+
+	<#include "/html/include/menu.html"> 
+	
+	<div class="main-content">
+
+		<#include "/html/include/header.html"> 
+
+		<div class="wrapper">
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="white-box">
+
+						<div class="panel-group accordion-main faq-main" id="accordion">
+
+							<#list data as a>
+								<div class="panel">
+									<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapse-${a_index+1}">
+										<h6 class="panel-title accordion-toggle">${a.name}</h6>
+									</div>
+									<div id="collapse-${a_index+1}" class="panel-collapse in" style="height: auto;">
+										<div class="panel-body">
+											<p>ID：${a.id}  </p>
+											<p>名称：${a.name}  </p>
+											<p>省市区： ${a.provinceName}-${a.cityName}-${a.areaName}</p>
+											<p>拼音：${a.pyFull}  </p>
+										</div>
+									</div>
+								</div>
+							 </#list>
+
+
+							<!--  没有数据 -->
+							<#if data?size==0>
+							<div class="panel">
+								<div class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapse-0">
+									<h6 class="panel-title accordion-toggle">没有数据</h6>
+								</div>
+								<div id="collapse-0" class="panel-collapse collapse">
+									<div class="panel-body">
+									</div>
+								</div>
+							</div>
+							</#if>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- End Wrapper--> 
+		
+		<#include "/html/include/footer.html"> 
+		<script type="text/javascript" src="/static/page/system/user/userList.js"></script>
+		
+	</div>
+	<!--End main content -->		
+</body>
+
+</html>

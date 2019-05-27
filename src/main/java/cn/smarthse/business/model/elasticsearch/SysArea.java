@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import cn.smarthse.business.entity.system.SysAreaStandard;
 import lombok.Data;
@@ -14,7 +13,7 @@ import lombok.Data;
  * 行政区域表（elasticsearch的index）,indexName必须全部小写字母
  *
  */
-@Document(indexName = "sys_area")
+//@Document(indexName = "sys_area")
 public @Data class SysArea implements Serializable {
 
 	private static final long serialVersionUID = 1L;

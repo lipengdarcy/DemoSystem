@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import cn.smarthse.config.security.web.ShiroPrincipal;
 import tk.mybatis.mapper.entity.Example;
@@ -35,6 +36,12 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 	 */
 	@Autowired(required = false)
 	protected GenericDao<T> dao;
+
+	/**
+	 * 持久层对象
+	 */
+	@Autowired(required = false)
+	protected MongoRepository<T, String> MongoRepository;
 
 	/**
 	 * 通过反射,获得定义Class时声明的父类的范型参数的类型. 如public BookManager extends GenricManager<Book>
@@ -90,7 +97,7 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 	 * @param loginStaffId
 	 *            当前登录员工ID
 	 */
-	private void setUpdateInfo(T entity, Integer updateBy) {
+	private void setUpdateInfo(T entity, String updateBy) {
 		Class<? extends Object> cls = entity.getClass();
 		Method setUpdateDate;
 		Method setUpdateBy;
@@ -148,16 +155,8 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 
 	/**
 	 * 設置創建記錄相关的信息
-	 * 
-	 * @Comments: <对此方法的描述，可以引用系统设计中的描述>
-	 * @author Horsy(何世壹) [hsy@smarthse.cn]
-	 * @since 2017年6月13日-下午2:30:17
-	 * @param entity
-	 *            实体类
-	 * @param createBy
-	 *            当前用户ID
 	 */
-	private void setCreateInfo(T entity, Integer createBy) {
+	private void setCreateInfo(T entity, String createBy) {
 		Class<? extends Object> cls = entity.getClass();
 		Method setCreateDate;
 		Method setCreateBy;
@@ -198,8 +197,18 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 	 *            对象
 	 */
 	public T insert(T record) {
-		//this.setCreateInfo(record, loginStaffId);
-		dao.insertSelective(record);
+		if (dao != null) {
+			ShiroPrincipal p = null;
+			Object obj = SecurityUtils.getSubject().getPrincipal();
+			p = (ShiroPrincipal) obj;
+			String uid = p.getUser().getId();
+			this.setUpdateInfo(record, uid);
+			this.setCreateInfo(record, uid);
+			dao.insertSelective(record);
+		}
+
+		if (MongoRepository != null)
+			MongoRepository.save(record);
 		return record;
 	}
 
@@ -210,16 +219,17 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 	 *            对象
 	 */
 	public int update(T record) {
-
-		ShiroPrincipal p = null;
-
-		Object obj = SecurityUtils.getSubject().getPrincipal();
-		p = (ShiroPrincipal) obj;
-
-		Integer loginStaffId = p.getUser().getId();
-		this.setUpdateInfo(record, loginStaffId);
-
-		return dao.updateByPrimaryKeySelective(record);
+		if (dao != null) {
+			ShiroPrincipal p = null;
+			Object obj = SecurityUtils.getSubject().getPrincipal();
+			p = (ShiroPrincipal) obj;
+			String uid = p.getUser().getId();
+			this.setUpdateInfo(record, uid);
+			return dao.updateByPrimaryKeySelective(record);
+		}
+		if (MongoRepository != null)
+			MongoRepository.save(record);
+		return 1;
 	}
 
 	/**
@@ -232,12 +242,15 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 		ShiroPrincipal p = null;
 		Object obj = SecurityUtils.getSubject().getPrincipal();
 		p = (ShiroPrincipal) obj;
-		Integer uid = p.getUser().getId();
+		String uid = p.getUser().getId();
 		this.setUpdateInfo(entity, uid);
 		this.setIsValid(entity, false);
 		// 提交更新
-		int updateCount = dao.updateByPrimaryKeySelective(entity);
-		return updateCount;
+		if (dao != null)
+			dao.updateByPrimaryKeySelective(entity);
+		if (MongoRepository != null)
+			MongoRepository.save(entity);
+		return 1;
 	}
 
 	/**
@@ -256,7 +269,9 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 	}
 
 	public T getById(String id) {
-		return dao.selectByPrimaryKey(id);
+		if (dao != null)
+			return dao.selectByPrimaryKey(id);
+		return MongoRepository.findById(id).get();
 	}
 
 	public List<T> selectList() {

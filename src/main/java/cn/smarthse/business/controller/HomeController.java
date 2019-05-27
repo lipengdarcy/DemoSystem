@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cn.smarthse.business.model.elasticsearch.SysArea;
 import cn.smarthse.framework.util.StringUtil;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -24,10 +23,8 @@ public class HomeController extends ControllerSupport {
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 		if (StringUtil.isEmpty(keyword))
 			return "index";
-		SysArea area = new SysArea();
-		area.setName(keyword);
 		m.put("global_keyword", keyword);
-		return "queryResult";
+		return "searchResult";
 	}
 
 	/**

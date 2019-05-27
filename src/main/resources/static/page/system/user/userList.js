@@ -20,20 +20,11 @@ function jqgridInit() {
 			label : '姓名',
 			name : 'realName'
 		}, {
-			label : '工号',
-			name : 'staffNo'
-		}, {
-			label : '部门',
-			name : 'deptName'
-		}, {
-			label : '岗位状态',
-			name : 'dutyState'
-		}, {
 			label : '手机号',
 			name : 'tel'
 		}, {
 			label : '角色',
-			name : 'roleNames'
+			name : 'role'
 		}, {
 			label : '操作',
 			name : 'option',
@@ -42,6 +33,7 @@ function jqgridInit() {
 		viewrecords : true,// 是否要显示总记录数
 		height : 'auto',// 高度自适应
 		autoheight : true,// 高度自适应
+		autowidth : true,// 宽度自适应
 		rownumbers : true,// 显示序号
 		// 每页显示记录
 		rowNum : 10,
@@ -51,7 +43,7 @@ function jqgridInit() {
 
 }
 
-//搜索
+// 搜索
 function searchForm() {
 	$("#jqGrid").jqGrid("setGridParam", {
 		search : true,
@@ -65,12 +57,12 @@ function reloadJqgrid() {
 }
 
 function optFormatter(cellvalue, options, rowObject) {
-	var viewBtn = "<div class='col-md-2 col-sm-3 col-xs-4 text-center'><a title='查看' onclick='view(" + rowObject.id
-			+ ")'><i class='ion-eye'></i></a></div>";
-	var editBtn = "<div class='col-md-2 col-sm-3 col-xs-4 text-center'><a title='编辑' onclick='edit(" + rowObject.id
-			+ ")'><i class='ion-edit'></i></a></div>";
-	var delBtn = "<div class='col-md-2 col-sm-3 col-xs-4 text-center'><a title='删除' onclick='del(" + rowObject.id
-			+ ")'><i class='ion-trash-a'></i></a></div>";
+	var viewBtn = "<div class='col-md-2 col-sm-3 col-xs-4 text-center'><a title='查看' onclick='view(\""
+			+ rowObject.id + "\")'><i class='ion-eye'></i></a></div>";
+	var editBtn = "<div class='col-md-2 col-sm-3 col-xs-4 text-center'><a title='编辑' onclick='edit(\""
+			+ rowObject.id + "\")'><i class='ion-edit'></i></a></div>";
+	var delBtn = "<div class='col-md-2 col-sm-3 col-xs-4 text-center'><a title='删除' onclick='del(\""
+			+ rowObject.id + "\")'><i class='ion-trash-a'></i></a></div>";
 
 	return viewBtn + editBtn + delBtn;
 }
