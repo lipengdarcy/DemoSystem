@@ -4,9 +4,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 主干加注释，加一个方法
+ */
+
 public class Test {
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		SimpleDateFormat dateTime = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 		String dateStr = "2016-04-11 11:44";
 		Date d = null;
@@ -17,7 +21,14 @@ public class Test {
 			e.printStackTrace();
 		}
 		System.out.println(d);
-				
+
+	}
+
+	/**
+	 * 主干加一个方法
+	 */
+	public static void test() {
+		System.out.println("主干加一个方法");
 	}
 
 }
