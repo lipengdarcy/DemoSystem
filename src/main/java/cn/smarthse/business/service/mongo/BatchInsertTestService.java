@@ -13,9 +13,8 @@ import org.springframework.stereotype.Service;
 
 import cn.smarthse.backup.dao.hotel.HotelDataMapper;
 import cn.smarthse.backup.entity.hotel.HotelData;
-import cn.smarthse.business.dao.mongo.MongoHotelDataDao;
 import cn.smarthse.business.entity.system.SysAreaStandard;
-import tk.mybatis.mapper.entity.Example;
+import cn.smarthse.business.repository.test.MongoHotelDataDao;
 
 /**
  * mybatis 批量数据插入测试（10000以上）

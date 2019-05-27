@@ -18,7 +18,7 @@ import com.github.pagehelper.PageHelper;
 import cn.smarthse.backup.dao.hotel.HotelDataMapper;
 import cn.smarthse.backup.entity.hotel.HotelData;
 import cn.smarthse.backup.model.hotel.HotelDataModel;
-import cn.smarthse.business.dao.mongo.MongoHotelDataDao;
+import cn.smarthse.business.repository.test.MongoHotelDataDao;
 import cn.smarthse.framework.generic.GenericServiceImpl;
 import cn.smarthse.framework.model.JqGridData;
 import cn.smarthse.framework.model.JqGridParam;

@@ -19,5 +19,13 @@ public class Test {
 		System.out.println(d);
 				
 	}
+	
+	/**
+	 * 分支 加一个方法，方法名和 主干一样，是否会冲突？
+	 */
+	public static void test() {
+		System.out.println("分支加一个方法");
+		System.out.println("主干？加一个方法");
+	}
 
 }

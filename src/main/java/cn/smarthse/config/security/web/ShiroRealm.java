@@ -1,5 +1,6 @@
 package cn.smarthse.config.security.web;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,9 +24,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cn.smarthse.business.entity.system.SysUser;
-import cn.smarthse.business.model.system.SysUserModel;
-import cn.smarthse.business.service.system.ISysUserService;
+import cn.smarthse.business.collection.system.SystemRole;
+import cn.smarthse.business.collection.system.SystemUser;
+import cn.smarthse.business.service.mongo.system.SystemUserService;
 import cn.smarthse.framework.util.encode.Encodes;
 
 /**
@@ -33,14 +34,14 @@ import cn.smarthse.framework.util.encode.Encodes;
  */
 public class ShiroRealm extends AuthorizingRealm {
 	private Logger logger = LogManager.getLogger(this.getClass());
-	
-	@Autowired
-	private ISysUserService userService;
 
-	//密码验证器
+	@Autowired
+	private SystemUserService SystemUserService;
+
+	// 密码验证器
 	@Autowired
 	private ShiroAuthorizingCredentialsMatcher credentialsMatcher;
-	
+
 	/**
 	 * 构造函数，设置安全的初始化信息
 	 */
@@ -60,21 +61,15 @@ public class ShiroRealm extends AuthorizingRealm {
 			// 登录账号为空
 			throw new AccountException("登录账号不能为空!");
 		}
-		//根据用户名/tel读取登录实体
-		SysUser user = userService.getUser(username);
+		// 根据用户名/tel读取登录实体
+		SystemUser user = SystemUserService.getUser(username);
 		if (user == null) {
 			//
 			throw new UnknownAccountException("账号不存在！");
 		}
-		
-		//TODO ExcessiveAttemptsException 已被禁止登录，登录超过设定次数，请%s后重新尝试！
-		//TODO LockedAccountException 登录次数过多，登录锁定
-		
-		//将user信息，转换为userModel
-		SysUserModel userModel = new SysUserModel(user);
-		
+
 		byte[] salt = Encodes.hexDecode(user.getSalt());
-		ShiroPrincipal subject = new ShiroPrincipal(userModel);
+		ShiroPrincipal subject = new ShiroPrincipal(user);
 		return new SimpleAuthenticationInfo(subject, user.getPassWord(), ByteSource.Util.bytes(salt), getName());
 	}
 
@@ -93,10 +88,14 @@ public class ShiroRealm extends AuthorizingRealm {
 			return info;
 		}
 		
-		SysUserModel user = p.getUser();
+		SystemUser user = p.getUser();
 		try {
 			if (!p.isAuthorized()) {
-				List<String> roleList = userService.getUserRoleCodeList(p.getUser().getId());
+				List<String> roleList = new ArrayList<String>();
+				List<SystemRole> list = user.getRole();
+				for(SystemRole a: list) {
+					roleList.add(a.getRoleCode());
+				}
 				p.setAuthorized(true);
 				p.setRoles(roleList);
 				logger.info("用户【{}】 角色列表为：【{}】" ,user.getRealName(), roleList);
@@ -112,49 +111,49 @@ public class ShiroRealm extends AuthorizingRealm {
 		return info;
 	}
 
-	
 	@PostConstruct
 	public void initCredentialsMatcher() {
 		setCredentialsMatcher(credentialsMatcher);
 	}
-	
+
 	@Override
 	protected void checkPermission(Permission permission, AuthorizationInfo info) {
 		authorizationValidate(permission);
 		super.checkPermission(permission, info);
 	}
-	
+
 	@Override
 	protected boolean[] isPermitted(List<Permission> permissions, AuthorizationInfo info) {
 		if (permissions != null && !permissions.isEmpty()) {
-            for (Permission permission : permissions) {
-        		authorizationValidate(permission);
-            }
-        }
+			for (Permission permission : permissions) {
+				authorizationValidate(permission);
+			}
+		}
 		return super.isPermitted(permissions, info);
 	}
-	
+
 	@Override
 	public boolean isPermitted(PrincipalCollection principals, Permission permission) {
 		authorizationValidate(permission);
 		return super.isPermitted(principals, permission);
 	}
-	
+
 	@Override
 	protected boolean isPermittedAll(Collection<Permission> permissions, AuthorizationInfo info) {
 		if (permissions != null && !permissions.isEmpty()) {
-            for (Permission permission : permissions) {
-            	authorizationValidate(permission);
-            }
-        }
+			for (Permission permission : permissions) {
+				authorizationValidate(permission);
+			}
+		}
 		return super.isPermittedAll(permissions, info);
 	}
-	
+
 	/**
 	 * 授权验证方法
+	 * 
 	 * @param permission
 	 */
-	private void authorizationValidate(Permission permission){
+	private void authorizationValidate(Permission permission) {
 		// 模块授权预留接口
 	}
 

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
+import cn.smarthse.business.collection.system.SystemUser;
 import cn.smarthse.business.controller.GiianErrorController;
 import cn.smarthse.business.entity.system.SysLog;
 import cn.smarthse.business.model.system.SysUserModel;
@@ -163,15 +164,15 @@ public class LogInterceptor implements HandlerInterceptor {
 
 			if (log != null) {
 				// 当前账号与姓名
-				String username = null, fullname = null;
-				Integer userId = null, cid = null;
+				String username = null, fullname = null, userId = null;
+				Integer cid = null;
 				// 通过shiro 获得当前 登录用户信息
-				SysUserModel userModel = ShiroUtil.getUserModel();
+				SystemUser userModel = ShiroUtil.getUserModel();
 				if (userModel != null) {
 					username = userModel.getUserName();
 					fullname = userModel.getRealName();
 					userId = userModel.getId();
-					cid = userModel.getCid();
+					cid = userModel.getJob().getCid();
 				}
 
 				SysLog syslog = new SysLog();
@@ -189,8 +190,8 @@ public class LogInterceptor implements HandlerInterceptor {
 				syslog.setCid(cid);
 				syslog.setUserFullname(fullname);
 				syslog.setUserName(username);
-				syslog.setCreateBy(userId);
-				syslog.setUpdateBy(userId);
+				// syslog.setCreateBy(userId);
+				// syslog.setUpdateBy(userId);
 				// TODO 保存日志
 				new SaveLogThread(syslog, sysLogService).start();
 			}
@@ -208,15 +209,15 @@ public class LogInterceptor implements HandlerInterceptor {
 	 */
 	private void addExceptionLog(Object handler, HttpServletRequest request, String message) {
 		// 当前账号与姓名
-		String username = null, fullname = null;
-		Integer userId = null, cid = null;
+		String username = null, fullname = null, userId = null;
+		Integer cid = null;
 		// 通过shiro 获得当前 登录用户信息
-		SysUserModel userModel = ShiroUtil.getUserModel();
+		SystemUser userModel = ShiroUtil.getUserModel();
 		if (userModel != null) {
 			username = userModel.getUserName();
 			fullname = userModel.getRealName();
 			userId = userModel.getId();
-			cid = userModel.getCid();
+			cid = userModel.getJob().getCid();
 		}
 
 		SysLog syslog = new SysLog();
@@ -233,8 +234,8 @@ public class LogInterceptor implements HandlerInterceptor {
 		syslog.setCid(cid);
 		syslog.setUserFullname(fullname);
 		syslog.setUserName(username);
-		syslog.setCreateBy(userId);
-		syslog.setUpdateBy(userId);
+		//syslog.setCreateBy(userId);
+		//syslog.setUpdateBy(userId);
 		// TODO 保存日志
 		new SaveLogThread(syslog, sysLogService).start();
 	}
