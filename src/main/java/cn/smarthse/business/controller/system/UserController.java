@@ -11,16 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.smarthse.business.collection.system.SystemRole;
 import cn.smarthse.business.collection.system.SystemUser;
 import cn.smarthse.business.controller.ControllerSupport;
 import cn.smarthse.business.entity.system.SysRole;
+import cn.smarthse.business.service.mongo.system.SystemRoleService;
 import cn.smarthse.business.service.mongo.system.SystemUserService;
-import cn.smarthse.business.service.system.ISysRoleService;
 import cn.smarthse.config.security.web.ShiroUtil;
 import cn.smarthse.framework.interceptor.log.Log;
 import cn.smarthse.framework.interceptor.log.LogConstans;
@@ -48,7 +50,7 @@ public class UserController extends ControllerSupport {
 	private SystemUserService SystemUserService;
 
 	@Autowired
-	private ISysRoleService roleService;
+	private SystemRoleService SystemRoleService;
 
 	// **************用户列表jqgrid模块*********************
 
@@ -57,7 +59,7 @@ public class UserController extends ControllerSupport {
 	 */
 	@RequestMapping()
 	public String list(HttpSession session, ModelMap m) {
-		List<SysRole> roleList = roleService.getRoleList(null);
+		List<SystemRole> roleList = SystemRoleService.getData(null);
 		m.addAttribute("roleList", roleList);
 		return basePath + "userList";
 	}
@@ -86,7 +88,7 @@ public class UserController extends ControllerSupport {
 	public String editPage(@RequestParam(value = "id", required = false) String id, ModelMap m) {
 		logger.debug("{} - 用户编辑页,id={}", prefix, id);
 		SystemUser user = SystemUserService.getById(id);
-		List<SysRole> roleList = roleService.getRoleList(null);
+		List<SystemRole> roleList = SystemRoleService.getData(null);
 		m.put("roleList", roleList);
 		m.put("editUser", user);
 		return basePath + "editUser";
@@ -94,7 +96,7 @@ public class UserController extends ControllerSupport {
 
 	@GetMapping(value = "/addUser")
 	public String addPage(ModelMap m) {
-		List<SysRole> roleList = roleService.getRoleList(null);
+		List<SystemRole> roleList = SystemRoleService.getData(null);
 		m.put("roleList", roleList);
 		return basePath + "addUser";
 	}
@@ -102,15 +104,20 @@ public class UserController extends ControllerSupport {
 	@Log(module = LogConstans.SYSTEM_USER, description = "用户新增", type = LogConstans.type_opt_add)
 	@PostMapping(value = "/add")
 	@ResponseBody
-	public ResponseData<String> add(SystemUser user) {
+	public ResponseData<String> add(@RequestBody SystemUser user) {
 		ResponseData<String> data = new ResponseData<String>();
-		if (StringUtils.isNotEmpty(user.getIdCard()) && SystemUserService.getUser(user.getIdCard()) != null) {
+		if (StringUtils.isNotEmpty(user.getUserName()) && SystemUserService.getUser(user.getUserName()) != null) {
 			data.setCode(-1);
+			data.setMessage("该用户名已被使用!");
+			return data;
+		}
+		if (StringUtils.isNotEmpty(user.getIdCard()) && SystemUserService.getUser(user.getIdCard()) != null) {
+			data.setCode(-2);
 			data.setMessage("该身份证号已被使用!");
 			return data;
 		}
 		if (StringUtils.isNotEmpty(user.getTel()) && SystemUserService.getUser(user.getTel()) != null) {
-			data.setCode(-1);
+			data.setCode(-3);
 			data.setMessage("该手机号已被使用!");
 			return data;
 		}
@@ -123,19 +130,30 @@ public class UserController extends ControllerSupport {
 	@Log(module = LogConstans.SYSTEM_USER, description = "用户编辑", type = LogConstans.type_opt_edit)
 	@PostMapping(value = "/edit")
 	@ResponseBody
-	public ResponseData<String> edit(SystemUser user) {
+	public ResponseData<String> edit(@RequestBody SystemUser user) {
 		ResponseData<String> data = new ResponseData<String>();
-		if (StringUtils.isNotEmpty(user.getIdCard()) && SystemUserService.getUser(user.getIdCard()) != null) {
-			data.setCode(-1);
-			data.setMessage("该身份证号已被使用!");
-			return data;
+
+		if (StringUtils.isNotEmpty(user.getIdCard())) {
+			SystemUser existUser = SystemUserService.getUser(user.getIdCard());
+			if (existUser != null && !existUser.getId().equals(user.getId())) {
+				data.setCode(-1);
+				data.setMessage("该身份证号已被使用!");
+				return data;
+			}
 		}
-		if (StringUtils.isNotEmpty(user.getTel()) && SystemUserService.getUser(user.getTel()) != null) {
-			data.setCode(-1);
-			data.setMessage("该手机号已被使用!");
-			return data;
+		if (StringUtils.isNotEmpty(user.getTel())) {
+			SystemUser existUser = SystemUserService.getUser(user.getTel());
+			if (existUser != null && !existUser.getId().equals(user.getId())) {
+				data.setCode(-2);
+				data.setMessage("该手机号已被使用!");
+				return data;
+			}
 		}
-		SystemUserService.editUser(user);
+		SystemUser oldValue = SystemUserService.getById(user.getId());
+		oldValue.setRealName(user.getRealName());
+		oldValue.setTel(user.getTel());
+		oldValue.setRole(user.getRole());
+		SystemUserService.editUser(oldValue);
 		data.setMessage("编辑成功!");
 		return data;
 	}

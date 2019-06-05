@@ -108,7 +108,7 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 			}
 
 			if (updateBy != null) {
-				setUpdateBy = cls.getDeclaredMethod("setUpdateBy", Integer.class);
+				setUpdateBy = cls.getDeclaredMethod("setUpdateBy", String.class);
 				if (setUpdateBy != null) {
 					setUpdateBy.invoke(entity, updateBy);
 				}
@@ -171,7 +171,7 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 			setIsValid(entity, true);
 
 			if (createBy != null) {
-				setCreateBy = cls.getDeclaredMethod("setCreateBy", Integer.class);
+				setCreateBy = cls.getDeclaredMethod("setCreateBy", String.class);
 				if (setCreateBy != null) {
 					setCreateBy.invoke(entity, createBy);
 				}
@@ -197,16 +197,16 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 	 *            对象
 	 */
 	public T insert(T record) {
+		ShiroPrincipal p = null;
+		Object obj = SecurityUtils.getSubject().getPrincipal();
+		p = (ShiroPrincipal) obj;
+		String uid = p.getUser().getId();
+		this.setUpdateInfo(record, uid);
+		this.setCreateInfo(record, uid);
+		this.setIsValid(record, true);
 		if (dao != null) {
-			ShiroPrincipal p = null;
-			Object obj = SecurityUtils.getSubject().getPrincipal();
-			p = (ShiroPrincipal) obj;
-			String uid = p.getUser().getId();
-			this.setUpdateInfo(record, uid);
-			this.setCreateInfo(record, uid);
 			dao.insertSelective(record);
 		}
-
 		if (MongoRepository != null)
 			MongoRepository.save(record);
 		return record;
@@ -219,16 +219,18 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 	 *            对象
 	 */
 	public int update(T record) {
+		ShiroPrincipal p = null;
+		Object obj = SecurityUtils.getSubject().getPrincipal();
+		p = (ShiroPrincipal) obj;
+		String uid = p.getUser().getId();
+		this.setUpdateInfo(record, uid);
+		this.setIsValid(record, true);
 		if (dao != null) {
-			ShiroPrincipal p = null;
-			Object obj = SecurityUtils.getSubject().getPrincipal();
-			p = (ShiroPrincipal) obj;
-			String uid = p.getUser().getId();
-			this.setUpdateInfo(record, uid);
-			return dao.updateByPrimaryKeySelective(record);
+			dao.updateByPrimaryKeySelective(record);
 		}
-		if (MongoRepository != null)
+		if (MongoRepository != null) {
 			MongoRepository.save(record);
+		}
 		return 1;
 	}
 

@@ -3,7 +3,6 @@ package cn.smarthse.framework.model;
 import java.io.Serializable;
 import java.util.List;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
 /**
@@ -39,6 +38,15 @@ public class DataTableData<T> implements Serializable {
 		this.recordsTotal = (int) data.getTotal();
 		this.recordsFiltered = (int) data.getTotal();
 		this.data = data.getList();
+	}
+	
+	/**
+	 * mongodb的分页对象
+	 */
+	public DataTableData(org.springframework.data.domain.Page<T> data) {
+		this.recordsTotal = (int) data.getTotalElements();
+		this.recordsFiltered = (int) data.getTotalElements();
+		this.data = data.getContent();
 	}
 
 	// getter and setter method

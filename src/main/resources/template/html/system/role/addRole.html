@@ -6,11 +6,11 @@
 				<tr>
 					<td width="120" class="active center">
 						<b class="red">*</b>
-						用户名
+						角色名称
 					</td>
 					<td>
 						<div class="input-group">
-							<input type="text" name="userName" placeholder="请输入用户名" />
+							<input type="text" name="roleName" />
 						</div>
 					</td>
 				</tr>
@@ -18,11 +18,11 @@
 				<tr>
 					<td width="120" class="active center">
 						<b class="red">*</b>
-						姓名
+						角色编码
 					</td>
 					<td>
 						<div class="input-group">
-							<input type="text" name="realName" placeholder="请输入姓名" />
+							<input type="text" name="roleCode" />
 						</div>
 					</td>
 				</tr>
@@ -30,25 +30,11 @@
 				<tr>
 					<td width="120" class="active center">
 						<b class="red">*</b>
-						手机号
+						角色描述
 					</td>
 					<td>
 						<div class="input-group">
-							<input type="text" name="tel" placeholder="请输入手机号" />
-						</div>
-					</td>
-				</tr>
-
-				<tr>
-					<td width="120" class="active center">
-						<b class="red">*</b>
-						角色
-					</td>
-					<td>
-						<div class="input-group">
-							<div id="roleList" class="input-group">
-								<#list roleList as role> <input type="checkbox" value="${role.id}" /><span>${role.roleName}</span></#list>
-							</div>
+							<input type="text" name="roleDesc" />
 						</div>
 					</td>
 				</tr>
@@ -56,10 +42,5 @@
 			</tbody>
 		</table>
 	</form>
-	<div>注：默认密码为123456</div>
 </div>
-
-
-
-
 

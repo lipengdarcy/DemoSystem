@@ -15,6 +15,13 @@ public @Data class SystemRole implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
+	
+	
+	/**
+	 * 企业ID
+	 */
+	private String cid;
+	
 	/**
 	 * 角色编码，示例：user,admin
 	 */
@@ -45,11 +52,11 @@ public @Data class SystemRole implements Serializable {
 	/**
 	 * 创建人
 	 */
-	private Integer createBy;
+	private String createBy;
 	/**
 	 * 更新人
 	 */
-	private Integer updateBy;
+	private String updateBy;
 	/**
 	 * 是否有效
 	 */

@@ -36,24 +36,23 @@
 
 						<form id="searchForm" class="form-horizontal">
 							<div class="form-group">
-								<label class="col-md-2 control-label">姓名/用户名</label>
+								<label class="col-md-1 control-label">姓名</label>
 								<div class="col-md-2">
-									<input class="form-control" name="keyword" type="text">
+									<input class="form-control" name="realName" type="text">
 								</div>
 								
-								<label class="col-md-1 control-label">部门</label>
-								<div class="col-md-1">
-									<input class="form-control" type="text">
+								<label class="col-md-1 control-label">用户名</label>
+								<div class="col-md-2">
+									<input class="form-control" name="userName" type="text">
 								</div>
 								
 								<label class="col-md-1 control-label">角色</label>
 								<div class="col-md-2">
-									<select class="form-control">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
+									<select name="role[0].id" class="form-control">
+										<option value="">请选择</option>
+										<#list roleList as role>
+											<option value="${role.id}">${role.roleName}</option>
+										</#list>
 									</select>
 								</div>
 								

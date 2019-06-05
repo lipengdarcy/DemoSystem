@@ -67,12 +67,12 @@ public @Data class SystemUser implements Serializable {
 	/**
 	 * 创建人
 	 */
-	private Integer createBy;
+	private String createBy;
 	
 	/**
 	 * 更新人
 	 */
-	private Integer updateBy;
+	private String updateBy;
 
 	/**
 	 * 是否有效

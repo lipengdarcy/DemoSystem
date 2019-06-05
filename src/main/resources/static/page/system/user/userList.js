@@ -24,7 +24,16 @@ function jqgridInit() {
 			name : 'tel'
 		}, {
 			label : '角色',
-			name : 'role'
+			name : 'role',
+			formatter : function(cellvalue, options, rowObject) {				
+				var result = '';
+				if(cellvalue){
+					cellvalue.forEach(function(value, index, array) {
+						result = result + value.roleName + ','
+					});
+				}				
+				return result;
+			}
 		}, {
 			label : '操作',
 			name : 'option',
@@ -75,7 +84,7 @@ function del(id) {
 	var myDialog = dialog({
 		title : '提示',
 		width : 300,
-		content : $('#delOne'),
+		content : '确认删除？',
 		lock : true,
 		okValue : '确定',
 		ok : function() {
@@ -140,47 +149,126 @@ function delBatch() {
 }
 
 function edit(id) {
+	var myDialog = dialog({
+		title : '编辑用户',
+		width : 600,
+		okValue : '确定',
+		ok : function() {
+			// 角色
+			var roleList = [];
+			$('#roleList input:checkbox:checked').each(function() {
+				var role = {
+					id : $(this).val(),
+					roleName : $(this).next().text()
+				};
+				roleList.push(role);
+			});
+			var data = {
+				id : $('#editForm input[name=id]').val(),
+				userName : $('#editForm input[name=userName]').val(),
+				realName : $('#editForm input[name=realName]').val(),
+				tel : $('#editForm input[name=tel]').val(),
+				role : roleList
+			};
 
-	myDialog = showDialogModal("编辑用户", "/system/user/editUser?id=" + id, "520",
-			"auto", function() {
-				submitForm("#editForm", "/system/user/edit", null, function(
-						data) {
-					_contentLoadTriggered = false;
-
-					if (data.code == -1) {
-						alertDiag(data.message);
+			$.ajax({
+				url : "/system/user/edit",
+				type : "POST",
+				// data : $('#editForm').serialize(),
+				dataType : "json",
+				contentType : "application/json",
+				data : JSON.stringify(data),
+				success : function(result) {
+					if (result.code == -1) {
+						alertDiag(result.message);
 						return false;
-					}
-
-					alertDiag(data.message, function() {
-						reloadJqgrid();
-						view(id);
-						myDialog.close().remove();
-					});
-				}, 'json');
-				return false;
+					} else
+						alertDiag(result.message, function() {
+							reloadJqgrid();
+						});
+				}
 			});
 
+		},
+		cancelValue : '取消',
+		cancel : function() {
+		}
+	});
+
+	$.ajax({
+		url : "/system/user/editUser?id=" + id,
+		success : function(data) {
+			myDialog.content(data);
+		}
+	});
+	myDialog.showModal();
 }
+
+// 表单验证
+function validateForm() {
+	return $("#addForm").validate({
+		rules : {
+			name : {
+				required : true
+			},
+			tel : {
+				required : true
+			}
+		}
+	}).form();
+};
+
 function addUser() {
-	myDialog1 = showDialogModal("新增用户", +"/system/user/addUser", "520", "auto",
-			function() {
-				submitForm("#addForm", +"/system/user/add", null,
-						function(data) {
-							_contentLoadTriggered = false;
-							if (data.code == -1) {
-								alertDiag(data.message);
-								return false;
-							}
+	var myDialog = dialog({
+		title : '新增用户',
+		width : 600,
+		okValue : '确定',
+		ok : function() {
+			if (validateForm()) {
+				// 角色
+				var roleList = [];
+				$('#roleList input:checkbox:checked').each(function() {
+					var role = {
+						id : $(this).val(),
+						roleName : $(this).next().text()
+					};
+					roleList.push(role);
+				});
+				var data = {
+					userName : $('#addForm input[name=userName]').val(),
+					realName : $('#addForm input[name=realName]').val(),
+					tel : $('#addForm input[name=tel]').val(),
+					role : roleList
+				};
 
-							alertDiag(data.message, function() {
+				$.ajax({
+					url : "/system/user/add",
+					type : "POST",
+					dataType : "json",
+					contentType : "application/json",
+					data : JSON.stringify(data),
+					success : function(result) {
+						if (result.code == -1) {
+							alertDiag(result.message);
+							return false;
+						} else
+							alertDiag(result.message, function() {
 								reloadJqgrid();
-								view(data.data);
-								myDialog1.close().remove();
 							});
+					}
+				});
+			}
+		},
+		cancelValue : '取消',
+		cancel : function() {
+		}
+	});
 
-						}, 'json');
-				return false;
-			});
-
+	$.ajax({
+		url : "/system/user/addUser",
+		success : function(data) {
+			myDialog.content(data);
+		}
+	});
+	myDialog.showModal();
 }

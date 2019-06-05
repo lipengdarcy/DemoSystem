@@ -20,6 +20,8 @@ import cn.smarthse.backup.entity.hotel.HotelData;
 import cn.smarthse.backup.model.hotel.HotelDataModel;
 import cn.smarthse.business.repository.test.MongoHotelDataDao;
 import cn.smarthse.framework.generic.GenericServiceImpl;
+import cn.smarthse.framework.model.DataTableData;
+import cn.smarthse.framework.model.DataTableParam;
 import cn.smarthse.framework.model.JqGridData;
 import cn.smarthse.framework.model.JqGridParam;
 import cn.smarthse.framework.util.StringUtil;
@@ -65,6 +67,38 @@ public class HotelDataService extends GenericServiceImpl<HotelData> {
 		PageHelper.startPage((int) param.getPage(), (int) param.getRows());
 		Page<HotelData> list = (Page<HotelData>) this.queryData(dataParam);
 		JqGridData<HotelData> data = new JqGridData<HotelData>(list, param);
+		return data;
+	}
+
+	/**
+	 * 分页查询数据,返回datatable格式的数据:mongodb
+	 * 
+	 */
+	public DataTableData<HotelData> getMongoData(DataTableParam param, HotelDataModel dataParam) {
+		PageRequest pageRequest = PageRequest.of(param.getStart() / param.getLength(), param.getLength());
+		Query query = new Query();
+		org.springframework.data.mongodb.core.query.Criteria c = new org.springframework.data.mongodb.core.query.Criteria();
+		// 姓名
+		if (!StringUtil.isEmpty(dataParam.getName()))
+			c.and("name").is(dataParam.getName());
+		// 手机
+		if (!StringUtil.isEmpty(dataParam.getMobile()))
+			c.and("mobile").is(dataParam.getMobile());
+		// 生日
+		if (!StringUtil.isEmpty(dataParam.getBirthday()))
+			c.and("birthday").is(dataParam.getBirthday());
+
+		query.addCriteria(c);
+		// 排序
+		query.with(new Sort(Direction.ASC, "_id"));
+
+		long count = mongoTemplate.count(query, HotelData.class);
+		// long count = mongoTemplate.count(query, "hotel_data");
+		query.with(pageRequest);
+		List<HotelData> list = mongoTemplate.find(query, HotelData.class);
+		org.springframework.data.domain.Page<HotelData> page = new org.springframework.data.domain.PageImpl<HotelData>(
+				list, pageRequest, count);
+		DataTableData<HotelData> data = new DataTableData<HotelData>(page);
 		return data;
 	}
 

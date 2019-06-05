@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,11 +17,10 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
+import cn.smarthse.business.collection.system.SystemLog;
 import cn.smarthse.business.collection.system.SystemUser;
 import cn.smarthse.business.controller.GiianErrorController;
-import cn.smarthse.business.entity.system.SysLog;
-import cn.smarthse.business.model.system.SysUserModel;
-import cn.smarthse.business.service.system.ISysLogService;
+import cn.smarthse.business.service.mongo.system.SystemLogService;
 import cn.smarthse.config.security.web.ShiroPrincipal;
 import cn.smarthse.config.security.web.ShiroUtil;
 import cn.smarthse.framework.interceptor.log.Log;
@@ -40,7 +38,7 @@ public class LogInterceptor implements HandlerInterceptor {
 
 	// 系统日志Service
 	@Autowired
-	private ISysLogService sysLogService;
+	private SystemLogService sysLogService;
 
 	// 异步保存访问日志
 	private static final ThreadLocal<Long> startTimeThreadLocal = new NamedThreadLocal<Long>("ThreadLocal StartTime");
@@ -99,7 +97,6 @@ public class LogInterceptor implements HandlerInterceptor {
 			modelAndView.addObject("nav", nav);
 			modelAndView.addObject("parentNav", parentNav);
 
-			// TODO
 			String contextPath = request.getContextPath();
 
 			ShiroPrincipal adminPrincipal = (ShiroPrincipal) subject.getPrincipal();
@@ -149,33 +146,14 @@ public class LogInterceptor implements HandlerInterceptor {
 
 	/**
 	 * 新增 操作日志
-	 * 
-	 * @Comments: <对此方法的描述，可以引用系统设计中的描述>
-	 * @author JannyShao(邵建义) [ksgameboy@qq.com]
-	 * @since 2019年2月20日-上午9:42:22
-	 * @param handler
 	 */
 	private void addSysLog(Object handler, HttpServletRequest request) {
-		//
 		if (handler instanceof HandlerMethod) {
 			HandlerMethod methodHandler = (HandlerMethod) handler;
 			// 有日志标签的方法
 			Log log = methodHandler.getMethod().getAnnotation(Log.class);
-
 			if (log != null) {
-				// 当前账号与姓名
-				String username = null, fullname = null, userId = null;
-				Integer cid = null;
-				// 通过shiro 获得当前 登录用户信息
-				SystemUser userModel = ShiroUtil.getUserModel();
-				if (userModel != null) {
-					username = userModel.getUserName();
-					fullname = userModel.getRealName();
-					userId = userModel.getId();
-					cid = userModel.getJob().getCid();
-				}
-
-				SysLog syslog = new SysLog();
+				SystemLog syslog = new SystemLog();
 				// 操作标题
 				syslog.setDescription(log.description());
 				syslog.setModuleName(log.module().moduleName);
@@ -186,13 +164,9 @@ public class LogInterceptor implements HandlerInterceptor {
 				syslog.setLogParams(JsonMapper.toJsonString(request.getParameterMap()));
 				syslog.setRequestUri(request.getRequestURI()); //
 				syslog.setUserAgent(request.getHeader("user-agent")); // 用户浏览器信息
-				//
-				syslog.setCid(cid);
-				syslog.setUserFullname(fullname);
-				syslog.setUserName(username);
-				// syslog.setCreateBy(userId);
-				// syslog.setUpdateBy(userId);
-				// TODO 保存日志
+				SystemUser user = ShiroUtil.getUserModel();
+				//syslog.setCid(user.getJob().getCid());
+				syslog.setUser(user);
 				new SaveLogThread(syslog, sysLogService).start();
 			}
 		}
@@ -200,27 +174,10 @@ public class LogInterceptor implements HandlerInterceptor {
 
 	/**
 	 * 添加异常日志
-	 * 
-	 * @Comments: <对此方法的描述，可以引用系统设计中的描述>
-	 * @author JannyShao(邵建义) [ksgameboy@qq.com]
-	 * @since 2019年2月20日-上午9:41:47
-	 * @param handler
-	 * @param message
 	 */
 	private void addExceptionLog(Object handler, HttpServletRequest request, String message) {
-		// 当前账号与姓名
-		String username = null, fullname = null, userId = null;
-		Integer cid = null;
-		// 通过shiro 获得当前 登录用户信息
-		SystemUser userModel = ShiroUtil.getUserModel();
-		if (userModel != null) {
-			username = userModel.getUserName();
-			fullname = userModel.getRealName();
-			userId = userModel.getId();
-			cid = userModel.getJob().getCid();
-		}
 
-		SysLog syslog = new SysLog();
+		SystemLog syslog = new SystemLog();
 		// 异常信息
 		syslog.setDescription(message);
 		// 操作类型
@@ -230,13 +187,9 @@ public class LogInterceptor implements HandlerInterceptor {
 		syslog.setLogParams(JsonMapper.toJsonString(request.getParameterMap()));
 		syslog.setRequestUri(request.getRequestURI()); //
 		syslog.setUserAgent(request.getHeader("user-agent")); // 用户浏览器信息
-		//
-		syslog.setCid(cid);
-		syslog.setUserFullname(fullname);
-		syslog.setUserName(username);
-		//syslog.setCreateBy(userId);
-		//syslog.setUpdateBy(userId);
-		// TODO 保存日志
+		SystemUser user = ShiroUtil.getUserModel();
+		//syslog.setCid(user.getCid());
+		syslog.setUser(user);
 		new SaveLogThread(syslog, sysLogService).start();
 	}
 
@@ -244,11 +197,11 @@ public class LogInterceptor implements HandlerInterceptor {
 	 * 保存日志线程
 	 */
 	public static class SaveLogThread extends Thread {
-		private SysLog log;
+		private SystemLog log;
 
-		private ISysLogService sysLogService;
+		private SystemLogService sysLogService;
 
-		public SaveLogThread(SysLog log, ISysLogService sysLogService) {
+		public SaveLogThread(SystemLog log, SystemLogService sysLogService) {
 			super(SaveLogThread.class.getSimpleName());
 			this.log = log;
 			this.sysLogService = sysLogService;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -23,9 +24,17 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
 
 	private Logger log = LogManager.getLogger(this.getClass());
 
+	/**
+	 * 日志拦截器
+	 */
+	@Bean
+	public LogInterceptor getLogInterceptor() {
+		return new LogInterceptor();
+	}
+
 	public void addInterceptors(InterceptorRegistry registry) {
 		log.info("配置 日志拦截器");
-		registry.addInterceptor(new LogInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(getLogInterceptor()).addPathPatterns("/**");
 		log.info("配置 权限拦截器");
 		registry.addInterceptor(new ShiroAuthInterceptor()).addPathPatterns("/**");
 		super.addInterceptors(registry);

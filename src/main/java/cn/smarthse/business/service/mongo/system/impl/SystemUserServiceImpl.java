@@ -50,10 +50,16 @@ public class SystemUserServiceImpl extends GenericServiceImpl<SystemUser> implem
 		Criteria c = new Criteria();
 		// 用户名
 		if (!StringUtil.isEmpty(dataParam.getUserName()))
-			c.and("userName").is(dataParam.getUserName());
+			c.and("userName").regex(dataParam.getUserName());
 		// 姓名
 		if (!StringUtil.isEmpty(dataParam.getRealName()))
-			c.and("realName").is(dataParam.getRealName());
+			c.and("realName").regex(dataParam.getRealName());
+		//角色
+		if (dataParam.getRole()!=null && !StringUtil.isEmpty(dataParam.getRole().get(0).getId())) {
+			Criteria c1 = new Criteria();
+			c1.and("id").is(dataParam.getRole().get(0).getId());
+			c.and("role").elemMatch(c1);
+		}
 		query.addCriteria(c);
 		// 排序
 		query.with(new Sort(Direction.ASC, "_id"));
@@ -102,9 +108,11 @@ public class SystemUserServiceImpl extends GenericServiceImpl<SystemUser> implem
 		ExampleMatcher matcher = ExampleMatcher.matching().withStringMatcher(ExampleMatcher.StringMatcher.EXACT)
 				.withIgnoreCase(true).withMatcher("userName", ExampleMatcher.GenericPropertyMatchers.exact());
 		// 创建实例
-		Example<SystemUser> example = Example.of(new SystemUser(), matcher);
+		Example<SystemUser> example = Example.of(queryParam, matcher);
 		Optional<SystemUser> user = SystemUserRepository.findOne(example);
-		return user.get();
+		if(user.isPresent())
+			return user.get();
+		return null;
 	}
 
 	private SystemUser getUserByIdCard(String idCard) {
@@ -114,9 +122,11 @@ public class SystemUserServiceImpl extends GenericServiceImpl<SystemUser> implem
 		ExampleMatcher matcher = ExampleMatcher.matching().withStringMatcher(ExampleMatcher.StringMatcher.EXACT)
 				.withIgnoreCase(true).withMatcher("idCard", ExampleMatcher.GenericPropertyMatchers.exact());
 		// 创建实例
-		Example<SystemUser> example = Example.of(new SystemUser(), matcher);
+		Example<SystemUser> example = Example.of(queryParam, matcher);
 		Optional<SystemUser> user = SystemUserRepository.findOne(example);
-		return user.get();
+		if(user.isPresent())
+			return user.get();
+		return null;
 	}
 
 	private SystemUser getUserByTel(String tel) {
@@ -128,7 +138,9 @@ public class SystemUserServiceImpl extends GenericServiceImpl<SystemUser> implem
 		// 创建实例
 		Example<SystemUser> example = Example.of(queryParam, matcher);
 		Optional<SystemUser> user = SystemUserRepository.findOne(example);
-		return user.get();
+		if(user.isPresent())
+			return user.get();
+		return null;
 	}
 
 	@Override
