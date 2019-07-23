@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smarthse.business.dao.ATempMapper">
+	<resultMap id="BaseResultMap"
+		type="cn.smarthse.business.entity.system.SysAreaStandard">
+		<id column="ID" jdbcType="BIGINT" property="id" />
+		<result column="pid" jdbcType="BIGINT" property="pid" />
+		<result column="SHORT_NAME" jdbcType="VARCHAR" property="shortName" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="LONGITUDE" jdbcType="VARCHAR" property="longitude" />
+		<result column="LATITUDE" jdbcType="VARCHAR" property="latitude" />
+		<result column="LEVEL" jdbcType="INTEGER" property="level" />
+		<result column="SORT" jdbcType="INTEGER" property="sort" />
+		<result column="provinceID" jdbcType="BIGINT" property="provinceid" />
+		<result column="provinceNAME" jdbcType="VARCHAR" property="provincename" />
+		<result column="cityID" jdbcType="BIGINT" property="cityid" />
+		<result column="cityNAME" jdbcType="VARCHAR" property="cityname" />
+		<result column="districtID" jdbcType="BIGINT" property="districtid" />
+		<result column="districtNAME" jdbcType="VARCHAR" property="districtname" />
+		<result column="townID" jdbcType="BIGINT" property="townid" />
+		<result column="townNAME" jdbcType="VARCHAR" property="townname" />
+		<result column="villageID" jdbcType="BIGINT" property="villageid" />
+		<result column="villageNAME" jdbcType="VARCHAR" property="villagename" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, pid, SHORT_NAME, NAME, LONGITUDE, LATITUDE, LEVEL,
+		SORT, provinceID,
+		provinceNAME,
+		cityID, cityNAME, districtID,
+		districtNAME, townID, townNAME, villageID,
+		villageNAME,
+		STATUS
+	</sql>
+
+	<!-- 单条插入，插入数据插入到a_temp -->
+	<insert id="singleInsert" keyProperty="id" useGeneratedKeys="true"
+		parameterType="cn.smarthse.business.entity.system.SysAreaStandard">
+		insert into a_temp
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="pid != null">
+				pid,
+			</if>
+			<if test="shortName != null">
+				SHORT_NAME,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="longitude != null">
+				LONGITUDE,
+			</if>
+			<if test="latitude != null">
+				LATITUDE,
+			</if>
+			<if test="level != null">
+				LEVEL,
+			</if>
+			<if test="sort != null">
+				SORT,
+			</if>
+			<if test="provinceid != null">
+				provinceID,
+			</if>
+			<if test="provincename != null">
+				provinceNAME,
+			</if>
+			<if test="cityid != null">
+				cityID,
+			</if>
+			<if test="cityname != null">
+				cityNAME,
+			</if>
+			<if test="districtid != null">
+				districtID,
+			</if>
+			<if test="districtname != null">
+				districtNAME,
+			</if>
+			<if test="townid != null">
+				townID,
+			</if>
+			<if test="townname != null">
+				townNAME,
+			</if>
+			<if test="villageid != null">
+				villageID,
+			</if>
+			<if test="villagename != null">
+				villageNAME,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="pid != null">
+				#{pid,jdbcType=BIGINT},
+			</if>
+			<if test="shortName != null">
+				#{shortName,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				#{longitude,jdbcType=VARCHAR},
+			</if>
+			<if test="latitude != null">
+				#{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="level != null">
+				#{level,jdbcType=INTEGER},
+			</if>
+			<if test="sort != null">
+				#{sort,jdbcType=INTEGER},
+			</if>
+			<if test="provinceid != null">
+				#{provinceid,jdbcType=BIGINT},
+			</if>
+			<if test="provincename != null">
+				#{provincename,jdbcType=VARCHAR},
+			</if>
+			<if test="cityid != null">
+				#{cityid,jdbcType=BIGINT},
+			</if>
+			<if test="cityname != null">
+				#{cityname,jdbcType=VARCHAR},
+			</if>
+			<if test="districtid != null">
+				#{districtid,jdbcType=BIGINT},
+			</if>
+			<if test="districtname != null">
+				#{districtname,jdbcType=VARCHAR},
+			</if>
+			<if test="townid != null">
+				#{townid,jdbcType=BIGINT},
+			</if>
+			<if test="townname != null">
+				#{townname,jdbcType=VARCHAR},
+			</if>
+			<if test="villageid != null">
+				#{villageid,jdbcType=BIGINT},
+			</if>
+			<if test="villagename != null">
+				#{villagename,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 批量插入，插入数据插入到a_temp -->
+	<insert id="batchInsert">
+		insert into a_temp (ID, pid, SHORT_NAME,
+		NAME, LONGITUDE, LATITUDE,
+		LEVEL, SORT, provinceID,
+		provinceNAME, cityID, cityNAME,
+		districtID,
+		districtNAME, townID,
+		townNAME, villageID, villageNAME,
+		STATUS)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id,jdbcType=BIGINT},
+			#{item.pid,jdbcType=BIGINT},
+			#{item.shortName,jdbcType=VARCHAR},
+			#{item.name,jdbcType=VARCHAR},
+			#{item.longitude,jdbcType=VARCHAR},
+			#{item.latitude,jdbcType=VARCHAR},
+			#{item.level,jdbcType=INTEGER},
+			#{item.sort,jdbcType=INTEGER},
+			#{item.provinceid,jdbcType=BIGINT},
+			#{item.provincename,jdbcType=VARCHAR},
+			#{item.cityid,jdbcType=BIGINT},
+			#{item.cityname,jdbcType=VARCHAR},
+			#{item.districtid,jdbcType=BIGINT},
+			#{item.districtname,jdbcType=VARCHAR},
+			#{item.townid,jdbcType=BIGINT},
+			#{item.townname,jdbcType=VARCHAR},
+			#{item.villageid,jdbcType=BIGINT},
+			#{item.villagename,jdbcType=VARCHAR},
+			#{item.status,jdbcType=INTEGER})
+		</foreach>
+	</insert>
+
+
+</mapper>

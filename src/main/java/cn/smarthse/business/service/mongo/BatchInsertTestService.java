@@ -90,13 +90,13 @@ public class BatchInsertTestService {
 			for (int index = 0; index < list.size();) {
 				if (batchLastIndex >= list.size()) {
 					batchLastIndex = list.size();
-					result = result * batchSqlSession.insert("cn.smarthse.hospital.dao.ASystem.ATempMapper.batchInsert",
+					result = result * batchSqlSession.insert("cn.smarthse.business.dao.ATempMapper.batchInsert",
 							list.subList(index, batchLastIndex));
 					batchSqlSession.commit();
 					System.out.println("index:" + index + " batchLastIndex:" + batchLastIndex);
 					break;// 数据插入完毕，退出循环
 				} else {
-					result = result * batchSqlSession.insert("cn.smarthse.hospital.dao.ASystem.ATempMapper.batchInsert",
+					result = result * batchSqlSession.insert("cn.smarthse.business.dao.ATempMapper.batchInsert",
 							list.subList(index, batchLastIndex));
 					batchSqlSession.commit();
 					System.out.println("index:" + index + " batchLastIndex:" + batchLastIndex);

@@ -6,7 +6,7 @@ import java.util.concurrent.CountDownLatch;
  * Created by Mobin on 2016/4/14.
  */
 public class CountDownLatchTest {
-    static CountDownLatch c = new CountDownLatch(2);
+    static CountDownLatch c = new CountDownLatch(3);
     public static void main(String[] args) throws InterruptedException {
         new Thread(new Runnable() {
             public void run() {
