@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<#include "/html/include/meta.html">
+<title>分库分表</title>
+</head>
+
+<body class="sticky-header">
+
+	<#include "/html/include/menu.html">
+	
+	<!-- main content start-->
+	<div class="main-content">
+
+		<#include "/html/include/header.html">
+
+		<!--body wrapper start-->
+		<div class="wrapper">
+
+			<div class="page-title-box">
+				<h4 class="page-title">分库分表测试</h4>
+				<div class="clearfix"></div>
+			</div>
+
+			<!--Start row-->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="white-box">
+					<table id="jqGrid" rel="jqgridForm"></table>
+					<div id="jqGridPager"></div>	
+					</div>	
+				</div>
+			</div>
+			<!--End row-->
+
+		</div>
+		<!-- End Wrapper-->
+
+		<#include "/html/include/footer.html"> 
+		<script type="text/javascript" src="/static/page/sharding/orderList.js"></script>
+
+	</div>
+	<!--End main content -->
+
+
+
+	
+
+	<!--Begin Page Level Plugin-->
+	<script src="/static/assets/plugins/morris-chart/morris.js"></script>
+	<script src="/static/assets/plugins/morris-chart/raphael-min.js"></script>
+	<script src="/static/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+	<script src="/static/assets/pages/dashboard.js"></script>
+	<!--End Page Level Plugin-->
+
+
+</body>
+
+</html>

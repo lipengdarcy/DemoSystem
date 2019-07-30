@@ -1,0 +1,80 @@
+#shardingsphere 配置
+spring:
+  shardingsphere:
+    props:
+      sql.show: true #是否开启SQL显示，默认值: false
+      executor.size: 8  #工作线程数量，默认值: CPU核数
+      check.table.metadata.enabled: true #是否在启动时检查分表元数据一致性，默认值: false
+    #shardingsphere 分库配置(2个主库，4个从库)
+    datasource: 
+      names: master0,master1,master0slave0,master0slave1,master1slave0,master1slave1
+      master0:
+        type: org.apache.commons.dbcp.BasicDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/master0?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+        username: root
+        password: 123456
+      master1: 
+        type: org.apache.commons.dbcp.BasicDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/master1?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+        username: root
+        password: 123456
+      master0slave0:
+        type: org.apache.commons.dbcp.BasicDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3307/master0?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+        username: root
+        password: 123456
+      master0slave1: 
+        type: org.apache.commons.dbcp.BasicDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3308/master0?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+        username: root
+        password: 123456
+      master1slave0:
+        type: org.apache.commons.dbcp.BasicDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3307/master1?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+        username: root
+        password: 123456
+      master1slave1: 
+        type: org.apache.commons.dbcp.BasicDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3308/master1?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+        username: root
+        password: 123456
+    #shardingsphere 分表配置
+    sharding:
+      binding-tables: t_order,t_order_item
+      broadcast-tables: t_config
+      default-database-strategy.inline:
+        sharding-column: user_id
+        algorithm-expression: ds$->{user_id % 2}  
+      tables: 
+        t_order:
+          actual-data-nodes: ds$->{0..1}.t_order$->{0..1}
+          table-strategy.inline:
+            sharding-column: order_id
+            algorithm-expression: t_order$->{order_id % 2}
+          key-generator:
+            column: order_id
+            type: SNOWFLAKE
+        t_order_item:
+          actual-data-nodes: ds$->{0..1}.t_order_item$->{0..1}
+          table-strategy.inline:
+            sharding-column: order_id
+            algorithm-expression: t_order_item$->{order_id % 2}
+          key-generator:
+            column: order_item_id
+            type: SNOWFLAKE
+      #主从读写分离
+      master-slave-rules:
+        ds0:
+          master-data-source-name: master0
+          slave-data-source-names: master0slave0, master0slave1
+        ds1:
+          master-data-source-name: master1
+          slave-data-source-names: master1slave0, master1slave1
+
+

@@ -1,5 +1,7 @@
 package cn.smarthse.config.datasource;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +16,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.shardingsphere.shardingjdbc.api.yaml.YamlShardingDataSourceFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +25,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
@@ -34,7 +38,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @Configuration
 @MapperScan(basePackages = "cn.smarthse.backup.dao", sqlSessionFactoryRef = "backupSqlSessionFactory")
 public class DataSourceConfig {
-	
+
 	/**
 	 * 日志对象
 	 */
@@ -154,6 +158,5 @@ public class DataSourceConfig {
 		logger.info("DataSourceConfig dynamicDataSource：定义动态数据源的sqlSession");
 		return a;
 	}
-
 
 }

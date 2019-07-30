@@ -1,4 +1,4 @@
-package oauth2;
+/*package oauth2;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -29,11 +29,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.CompositeFilter;
 
-/**
+*//**
  * https://spring.io/guides/tutorials/spring-boot-oauth2/
  * 
  * spring security demo
- */
+ *//*
 @SpringBootApplication
 @EnableOAuth2Sso
 @RestController
@@ -46,24 +46,24 @@ public class SocialApplication extends WebSecurityConfigurerAdapter {
 		SpringApplication.run(SocialApplication.class, args);
 	}
 
-	/**
+	*//**
 	 * It’s not a great idea to return a whole Principal in a /user endpoint like
 	 * that (it might contain information you would rather not reveal to a browser
 	 * client). We only did it to get something working quickly. Later in the guide
 	 * we will convert the endpoint to hide the information we don’t need the
 	 * browser to have.
-	 */
+	 *//*
 	@RequestMapping("/user")
 	public Principal user(Principal principal) {
 		return principal;
 	}
 
-	/**
+	*//**
 	 * This app will now work fine and authenticate as before, but without giving
 	 * the user a chance to click on the link we just provided. To make the link
 	 * visible we also need to switch off the security on the home page by adding a
 	 * WebSecurityConfigurer:
-	 */
+	 *//*
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
@@ -73,14 +73,14 @@ public class SocialApplication extends WebSecurityConfigurerAdapter {
 				.and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 	}
 
-	/**
+	*//**
 	 * Handling the Redirects. The last change we need to make is to explicitly
 	 * support the redirects from our app to Facebook. This is handled in Spring
 	 * OAuth2 with a servlet Filter, and the filter is already available in the
 	 * application context because we used @EnableOAuth2Client. All that is needed
 	 * is to wire the filter up so that it gets called in the right order in our
 	 * Spring Boot application. To do that we need a FilterRegistrationBean:
-	 */
+	 *//*
 	@Bean
 	public FilterRegistrationBean<OAuth2ClientContextFilter> oauth2ClientFilterRegistration(
 			OAuth2ClientContextFilter filter) {
@@ -145,3 +145,4 @@ public class SocialApplication extends WebSecurityConfigurerAdapter {
 	}
 
 }
+*/
