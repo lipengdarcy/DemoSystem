@@ -12,7 +12,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @ApiIgnore
 @Controller
 @RequestMapping("/")
-public class HomeController extends ControllerSupport {
+public class HomeController {
 
 	/**
 	 * 首页 or 搜索结果页面

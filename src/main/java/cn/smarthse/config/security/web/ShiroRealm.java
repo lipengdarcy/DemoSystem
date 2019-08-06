@@ -24,9 +24,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cn.smarthse.business.collection.system.SystemRole;
-import cn.smarthse.business.collection.system.SystemUser;
-import cn.smarthse.business.service.mongo.system.SystemUserService;
+import cn.smarthse.business.mongo.collection.system.SystemRole;
+import cn.smarthse.business.mongo.collection.system.SystemUser;
+import cn.smarthse.business.mongo.service.system.SystemUserService;
 import cn.smarthse.framework.util.encode.Encodes;
 
 /**

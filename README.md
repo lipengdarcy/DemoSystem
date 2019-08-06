@@ -17,6 +17,8 @@
 
 4. cn.smarthse.framework: 框架相关，如拦截器、过滤器、工具类等
 
+5. 系统整合mysql数据库和mongodb数据库 ，cn.smarthse.business.mongo目录下的是mongodb数据库相关，其余的是mysql
+
 
 
 ## 打包发布说明

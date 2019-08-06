@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cn.smarthse.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -8,15 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import lombok.Data;
 
 /**
- * 《系统配置》
- * 
- * 
- * @Project:  platform-www
- * @Module ID:   <(模块)类编号，可以引用系统设计中的类编号>
- * @Comments:  <对此类的描述，可以引用系统设计中的描述>
- * @JDK version used:      <JDK1.8> 
- * @author JannyShao(邵建义) [ksgameboy@qq.com]
- * @since 2018年10月30日-上午9:37:56
+ * 系统配置
  */
 @ConfigurationProperties("sysconfig")
 public @Data class SysconfigProperties {

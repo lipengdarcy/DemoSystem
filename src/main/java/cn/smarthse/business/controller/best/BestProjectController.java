@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
-import cn.smarthse.business.controller.ControllerSupport;
 import cn.smarthse.business.entity.best.BestContract;
 import cn.smarthse.business.entity.best.BestProject;
 import cn.smarthse.business.entity.best.TnetOrder;
@@ -29,7 +28,7 @@ import io.swagger.annotations.ApiOperation;
 @Controller
 @Api(value = "查询百世订单、产品、合同等信息", tags = "百世订单、产品、合同")
 @RequestMapping(value = "/best")
-public class BestProjectController extends ControllerSupport {
+public class BestProjectController{
 
 	private final String basePath = "best/";
 

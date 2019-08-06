@@ -15,13 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
-import cn.smarthse.business.controller.ControllerSupport;
 import cn.smarthse.business.entity.WxDepartment;
-import cn.smarthse.business.entity.WxUser;
-import cn.smarthse.business.model.system.SysUserModel;
-import cn.smarthse.business.model.system.SysUserSeachModel;
 import cn.smarthse.business.model.wechat.WxUserModel;
 import cn.smarthse.business.service.wechat.IWxDepartmentService;
 import cn.smarthse.business.service.wechat.IWxUserService;
@@ -36,7 +31,7 @@ import io.swagger.annotations.Api;
 @Api(value = " 微信用户管理", tags = " 微信用户管理")
 @Controller
 @RequestMapping("wechat/user")
-public class WeChatUserController extends ControllerSupport {
+public class WeChatUserController{
 
 	private Logger logger = LogManager.getLogger(this.getClass());
 

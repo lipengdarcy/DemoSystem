@@ -13,7 +13,6 @@ import java.util.List;
 
 import cn.smarthse.business.entity.system.SysUser;
 import cn.smarthse.business.entity.system.SysUserRole;
-import cn.smarthse.business.enums.DutyStateEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -122,7 +121,6 @@ public @Data class SysUserModel implements Serializable{
 		this.cid = user.getCid();
 		this.createTime = user.getCreateTime();
 		this.deptJoinDate = user.getDeptJoinDate();
-		this.dutyState = (DutyStateEnum.getName(user.getDutyState()));
 		this.id = user.getId();
 		this.idCard = user.getIdCard();
 		this.passWord = user.getPassWord();

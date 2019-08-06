@@ -3,7 +3,7 @@ package cn.smarthse.config.security.web;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
-import cn.smarthse.business.collection.system.SystemUser;
+import cn.smarthse.business.mongo.collection.system.SystemUser;
 
 /**
  * 读取Shrio 当前 登录者信息

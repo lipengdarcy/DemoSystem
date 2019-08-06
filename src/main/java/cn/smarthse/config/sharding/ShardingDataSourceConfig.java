@@ -45,8 +45,8 @@ import tk.mybatis.spring.annotation.MapperScan;
 /**
  * Mybatis配置文件, 数据分片 + 读写分离
  */
-@Configuration
-@MapperScan(basePackages = "cn.smarthse.sharding.dao", sqlSessionFactoryRef = "shardginSqlSessionFactory")
+//@Configuration
+//@MapperScan(basePackages = "cn.smarthse.sharding.dao", sqlSessionFactoryRef = "shardginSqlSessionFactory")
 public class ShardingDataSourceConfig {
 
 	/**

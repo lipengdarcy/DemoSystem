@@ -17,7 +17,7 @@ import cn.smarthse.sharding.dao.OrderItemDao;
 import cn.smarthse.sharding.entity.Order;
 import cn.smarthse.sharding.entity.OrderItem;
 
-@Service
+//@Service
 public class ShardingDemoService {
 
 	@Resource

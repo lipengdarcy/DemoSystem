@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.smarthse.business.collection.system.SystemUser;
+import cn.smarthse.business.mongo.collection.system.SystemUser;
 import lombok.Data;
 
 /**

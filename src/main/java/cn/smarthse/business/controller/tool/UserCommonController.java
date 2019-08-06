@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.smarthse.business.controller.ControllerSupport;
 import cn.smarthse.business.entity.system.SysUser;
 import cn.smarthse.business.model.system.SysUserChooseModel;
 import cn.smarthse.business.model.system.SysUserModel;
@@ -35,7 +34,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "组件：接口",tags="组件：接口")
 @Controller
 @RequestMapping("tool/user")
-public class UserCommonController extends ControllerSupport {
+public class UserCommonController{
 	private final String info_prefix = "【用户选择组件】";
 
 	@Autowired
@@ -66,7 +65,6 @@ public class UserCommonController extends ControllerSupport {
 	@RequestMapping(value = "/getUsers", method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public ResponseData<Collection<SysUserChooseModel>> getUsers(String roleIds) {
-		logger.info("{} - 获取用户列表, roleIds={}",info_prefix, roleIds);
 		ResponseData<Collection<SysUserChooseModel>> data = new ResponseData<>();
 		//当前用户所在企业, 默认暂时为1
 		Integer cid = ShiroUtil.getLoginCid()!=null ? ShiroUtil.getLoginCid() : 1;
