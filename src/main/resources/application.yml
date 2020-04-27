@@ -7,8 +7,7 @@ spring.profiles.active: dev
 #tomcat/undertow配置
 server:
   port: 8080
-  contextPath: /
-  undertow: 
+  undertow:
     accesslog: 
       enabled: true  # 是否开启服务器的访问日志
       dir: log  # 服务器的访问日志所在目录
@@ -24,6 +23,8 @@ server:
     #io-threads:  # Number of I/O threads to create for the worker.
     #max-http-post-size:  # Maximum size in bytes of the HTTP post content.
     #worker-threads:  # Number of worker threads.
+  servlet:
+    context-path: /
 
 #日志配置
 logging:

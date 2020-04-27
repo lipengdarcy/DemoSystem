@@ -62,7 +62,7 @@ public class SystemUserServiceImpl extends GenericServiceImpl<SystemUser> implem
 		}
 		query.addCriteria(c);
 		// 排序
-		query.with(new Sort(Direction.ASC, "_id"));
+		query.with(Sort.by(Direction.ASC, "_id"));
 		return query;
 	}
 

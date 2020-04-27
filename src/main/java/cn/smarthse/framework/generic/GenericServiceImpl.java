@@ -312,12 +312,12 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 	public PageRequest buildPageRequest(int pageNumber, int pageSize, String sortType) {
 		Sort sort = null;
 		if ("auto".equals(sortType)) {
-			sort = new Sort(Direction.DESC, "id");
+			sort = Sort.by(Direction.DESC, "id");
 		} else if ("birthday".equals(sortType)) {
-			sort = new Sort(Direction.ASC, "birthday");
+			sort = Sort.by(Direction.ASC, "birthday");
 		}
 		// 参数1表示当前第几页,参数2表示每页的大小,参数3表示排序
-		return new PageRequest(pageNumber - 1, pageSize, sort);
+		return PageRequest.of(pageNumber - 1, pageSize, sort);
 	}
 
 	/**

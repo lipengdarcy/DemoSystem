@@ -19,7 +19,7 @@ public class TikaExtraction {
 	public static String getDoc() {
 		// String filename = "C:/Users/darcy/Desktop/3.pdf";
 		// String filename = "C:/Users/darcy/Desktop/2.xml";
-		String filename = "C:/Users/darcy/Desktop/1.doc";
+		String filename = "C:/Users/darcy/Desktop/ABC.pdf";
 		Tika tika = new Tika();
 		String filecontent = null;
 		try {

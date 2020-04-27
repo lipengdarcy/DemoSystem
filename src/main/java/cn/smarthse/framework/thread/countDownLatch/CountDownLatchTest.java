@@ -14,6 +14,7 @@ public class CountDownLatchTest {
                 c.countDown();
                 System.out.println(2);
                 c.countDown();
+                c.countDown();
             }
         }).start();
 

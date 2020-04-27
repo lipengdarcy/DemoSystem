@@ -103,18 +103,18 @@ spring:
     host: 192.168.1.111
     port: 6379
     password: hello_redis
-    pool:
-      max-active: 10
-      max-wait: 10
-      min-idle: 1
-      max-idle: 1
     #redis集群节点：RedisNode
     cluster: 
       #是否启用redis集群
       clusterable: false
       nodes: 127.0.0.1:7001,127.0.0.1:7002,127.0.0.1:7003
       timeout: 2000
-      max-redirects: 8     
+      max-redirects: 8
+    jedis:
+      pool:
+        min-idle: 1
+        max-idle: 1
+        max-wait:
 
 
 #阿里云oss配置

@@ -40,7 +40,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.google.common.collect.Lists;
 
-import tk.mybatis.spring.annotation.MapperScan;
+//import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * Mybatis配置文件, 数据分片 + 读写分离

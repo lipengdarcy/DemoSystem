@@ -90,7 +90,7 @@ public class HotelDataService extends GenericServiceImpl<HotelData> {
 
 		query.addCriteria(c);
 		// 排序
-		query.with(new Sort(Direction.ASC, "_id"));
+		query.with(Sort.by(Direction.ASC, "_id"));
 
 		long count = mongoTemplate.count(query, HotelData.class);
 		// long count = mongoTemplate.count(query, "hotel_data");
@@ -119,7 +119,7 @@ public class HotelDataService extends GenericServiceImpl<HotelData> {
 
 		query.addCriteria(c);
 		// 排序
-		query.with(new Sort(Direction.ASC, "_id"));
+		query.with(Sort.by(Direction.ASC, "_id"));
 
 		long count = mongoTemplate.count(query, HotelData.class);
 		// long count = mongoTemplate.count(query, "hotel_data");
