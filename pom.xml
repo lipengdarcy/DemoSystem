@@ -517,11 +517,11 @@
 		</dependency>
 
 		<!-- 分布式事务框架 EasyTransaction -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.yiqiniu.easytrans</groupId>
 			<artifactId>easytrans-starter</artifactId>
 			<version>1.4.3</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- 分布式锁 -->
 		<dependency>
