@@ -9,7 +9,7 @@ import java.nio.channels.FileChannel;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Created by Mobin on 2017/8/5.
+ * 文件的读取和写入，实现Closeable
  */
 public class Storage implements Closeable, AutoCloseable {
 	private final RandomAccessFile storeFile;

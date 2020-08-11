@@ -14,7 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Created by Mobin on 2017/8/5.
+ * 大文件下载线程
  */
 public class DownloadTask implements Runnable {
 	private final long lowerBound;

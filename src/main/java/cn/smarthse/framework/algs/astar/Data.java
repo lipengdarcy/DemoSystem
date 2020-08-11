@@ -1,23 +1,19 @@
 package cn.smarthse.framework.algs.astar;
 
-
-public class Data
-{
+public class Data {
 	Point point;
 	double g;
 	double h;
 	Data parent;
-	
-	public Data(Point p, double g, double h, Data parent)
-	{
+
+	public Data(Point p, double g, double h, Data parent) {
 		this.point = p;
 		this.g = g;
 		this.h = h;
 		this.parent = parent;
 	}
-	
-	double f()
-	{
+
+	double f() {
 		return g + h;
 	}
 }

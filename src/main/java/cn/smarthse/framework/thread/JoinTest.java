@@ -4,14 +4,14 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by MOBIN on 2016/8/18.
+ * join实现线程按顺序执行
  */
 public class JoinTest implements Runnable {
 	@Override
 	public void run() {
 		System.out.printf("Test Begining data source loading: %s\n", new Date());
 		try {
-			TimeUnit.SECONDS.sleep(1);
+			TimeUnit.SECONDS.sleep(10);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

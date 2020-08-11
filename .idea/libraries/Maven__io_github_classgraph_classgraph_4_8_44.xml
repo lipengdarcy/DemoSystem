@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: io.github.classgraph:classgraph:4.8.44">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../Java/Maven-3.3.9/repository/io/github/classgraph/classgraph/4.8.44/classgraph-4.8.44.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../Java/Maven-3.3.9/repository/io/github/classgraph/classgraph/4.8.44/classgraph-4.8.44-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../Java/Maven-3.3.9/repository/io/github/classgraph/classgraph/4.8.44/classgraph-4.8.44-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

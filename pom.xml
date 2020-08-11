@@ -34,10 +34,27 @@
 		<joda-time.version>2.9.9</joda-time.version>
 		<springfox.version>2.8.0</springfox.version>
 
+		<scala.binary.version>2.12</scala.binary.version>
+		<spark.version>2.4.5</spark.version>
+		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version> <!-- 消除pom的unknown error提示 -->
 	</properties>
 
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka -->
+<!-- 		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.13</artifactId>
+			<version>2.5.0</version>
+		</dependency> -->
+
+
 
 		<!-- 1.springboot 全家桶开始 -->
 
@@ -252,7 +269,7 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-		</dependency>		
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -517,11 +534,8 @@
 		</dependency>
 
 		<!-- 分布式事务框架 EasyTransaction -->
-		<!-- <dependency>
-			<groupId>com.yiqiniu.easytrans</groupId>
-			<artifactId>easytrans-starter</artifactId>
-			<version>1.4.3</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.yiqiniu.easytrans</groupId> <artifactId>easytrans-starter</artifactId> 
+			<version>1.4.3</version> </dependency> -->
 
 		<!-- 分布式锁 -->
 		<dependency>
@@ -563,6 +577,58 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-auth</artifactId>
+			<version>3.1.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+		<!-- spark 相关，spark和hadoop版本要一致 -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-core_${scala.binary.version}</artifactId>
+			<version>${spark.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming_${scala.binary.version}</artifactId>
+			<version>${spark.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-sql_${scala.binary.version}</artifactId>
+			<version>${spark.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-hive_${scala.binary.version}</artifactId>
+			<version>${spark.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-mllib_${scala.binary.version}</artifactId>
+			<version>${spark.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-10 -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming-kafka-0-10_2.12</artifactId>
+			<version>2.4.5</version>
+		</dependency>
+
+
+
+
+
+
+
 
 
 	</dependencies>
@@ -595,7 +661,7 @@
 					<target>1.8</target>
 					<encoding>UTF-8</encoding>
 					<compilerArguments>
-						<!-- <verbose /> 打开编译详情-->
+						<!-- <verbose /> 打开编译详情 -->
 						<!-- <bootclasspath>${java.home}\lib\rt.jar;${java.home}\lib\jce.jar</bootclasspath> -->
 					</compilerArguments>
 				</configuration>

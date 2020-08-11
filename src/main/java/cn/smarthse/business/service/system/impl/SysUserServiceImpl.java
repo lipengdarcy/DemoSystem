@@ -2,6 +2,7 @@ package cn.smarthse.business.service.system.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,10 +112,6 @@ public class SysUserServiceImpl extends GenericServiceImpl<SysUser> implements I
 		return user;
 	}
 
-	@Override
-	public List<String> getUserRoleCodeList(Integer userId) {
-		return roleService.getUserRoleCodeList(userId);
-	}
 
 	@Override
 	public List<SysUser> getUserListBySearchModel(SysUserSeachModel searchModel) {
@@ -308,21 +305,6 @@ public class SysUserServiceImpl extends GenericServiceImpl<SysUser> implements I
 
 	}
 
-	@Override
-	public Boolean hasOthersByTel(String tel, Integer userId) {
-		logger.info("校验ID为{}的用户的手机号({})是否被其他用户使用!", userId, tel);
-		Example example = new Example(SysUser.class);
-		example.createCriteria().andEqualTo("isValid", true).andEqualTo("tel", tel);
-		List<SysUser> list = this.getListByExample(example);
-
-		Boolean hasOthers = false;
-		if (list.size() > 1)
-			hasOthers = true;
-		if (list.size() == 1 && list.get(0).getId() != userId)
-			hasOthers = true;
-
-		return hasOthers;
-	}
 
 	@Override
 	public Boolean hasOthersByIdCard(String idCard, Integer userId) {
@@ -356,12 +338,6 @@ public class SysUserServiceImpl extends GenericServiceImpl<SysUser> implements I
 		return hasOthers;
 	}
 
-	@Override
-	public Boolean isTelExsists(String tel) {
-		Example example = new Example(SysUser.class);
-		example.createCriteria().andEqualTo("isValid", true).andEqualTo("tel", tel);
-		return this.getOneByExample(example) == null ? false : true;
-	}
 
 	@Transactional(readOnly = false)
 	@Override
@@ -478,6 +454,60 @@ public class SysUserServiceImpl extends GenericServiceImpl<SysUser> implements I
 		user.setPassWord(Encodes.hexEncode(hashPassword));
 		user.setSalt(Encodes.hexEncode(salt));
 		return this.update(user);
+	}
+
+	@Override
+	public List<String> getUserRoleList(Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getUserRoleNameList(Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getUserPermissionList(Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getUserPermissionNameList(Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SysUser> getAllSkillUser(Integer cid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Integer> getAllSkillUserIds(Integer cid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SysUser> getAllUserByLastSyncDate(Date lastSyncDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean isModileExsists(String mobile, Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean isAdmin() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

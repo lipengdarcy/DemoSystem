@@ -19,7 +19,7 @@ public interface JavaInterface {
 	String default_string = "没有修饰符等价于public static final 变量";
 
 	/**
-	 * 接口可以有静态方法和抽象类重名，则调用抽象类的
+	 * 接口可以有静态方法，和抽象类重名，则调用抽象类的
 	 */
 	public static void staticMethod() {
 		System.out.println("接口可以有静态方法和抽象类重名，则调用抽象类的");
