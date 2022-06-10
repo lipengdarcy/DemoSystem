@@ -22,7 +22,7 @@
 		<project.build.jdk>8</project.build.jdk>
 		<java.version>8</java.version>
 
-		<dubbo.version>2.6.3</dubbo.version>
+		<dubbo.version>2.6.12</dubbo.version>
 		<mysql.version>6.0.6</mysql.version>
 		<druid.version>1.1.9</druid.version>
 		<mybatis.mapper.version>3.4.0</mybatis.mapper.version>
